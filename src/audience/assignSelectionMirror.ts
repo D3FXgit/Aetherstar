@@ -17,7 +17,7 @@ export const ASSIGN_MIRROR_POLL_MS = 100
 
 export interface MirroredPick {
   name: string
-  /** 1-based mic number, exactly as drawn on the badge. */
+  /** 1-based mic number, exactly as drawn on the Tag. */
   micNumber: number
 }
 

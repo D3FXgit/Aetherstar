@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download · AetherStar</title>
+  <meta name="description" content="Download AetherStar 1.1 for Windows or 1.0 for Mac. Requirements, install notes, what's new and the source code.">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta property="og:title" content="Download · AetherStar">
+  <meta property="og:description" content="Download AetherStar 1.1 for Windows or 1.0 for Mac. Requirements, install notes, what's new and the source code.">
+  <meta property="og:image" content="https://aetherstar.dev/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://aetherstar.dev/download.html">
+  <meta property="og:site_name" content="AetherStar">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://aetherstar.dev/download.html">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/archivo-var.woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar" data-bar>
+    <div class="bar__inner">
+      <a class="wordmark" href="index.html" aria-label="AetherStar home">AETHERSTAR</a>
+      <nav class="bar__nav" aria-label="Pages">
+        <a href="features.html">Features</a><a href="songs.html">Songs</a><a href="https://github.com/D3FXgit/Eather-Star" rel="noopener" class="ext">GitHub</a>
+      </nav>
+      <a class="btn btn--small" href="download.html" aria-current="page">Download</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="wrap page-head">
+      <h1>Download AetherStar</h1>
+      <p class="lead">Free, for Windows and Mac. The installers are on the project's GitHub releases page.</p>
+    </header>
+
+    <section class="wrap download">
+      <ul class="dl">
+        <li class="dl__row">
+          <div>
+            <h2 class="h3">Windows</h2>
+            <p>Version 1.1.0 for Windows 10 and 11, 64-bit. Installer, 131 MB.</p>
+          </div>
+          <a class="btn" href="https://github.com/D3FXgit/Eather-Star/releases/latest" rel="noopener">Download for Windows</a>
+        </li>
+        <li class="dl__row">
+          <div>
+            <h2 class="h3">Mac</h2>
+            <p>Version 1.0.0 for Macs with Apple silicon. Disk image, 152 MB. It doesn't have the 1.1 changes yet.</p>
+          </div>
+          <a class="btn btn--ghost" href="https://github.com/D3FXgit/Eather-Star/releases/latest" rel="noopener">Download for Mac</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="wrap" style="margin-top:var(--section)">
+      <div class="cols">
+        <div class="prose">
+          <h2>What you need</h2>
+          <dl class="req">
+            <div><dt>System</dt><dd>Windows 10 or 11, 64-bit, or macOS on Apple silicon</dd></div>
+            <div><dt>Microphones</dt><dd>At least one. USB mics, headsets or an audio interface, up to eight</dd></div>
+            <div><dt>Songs</dt><dd>UltraStar songs of your own. <a href="songs.html">Where to get them</a></dd></div>
+            <div><dt>Optional</dt><dd>A second monitor or TV for the audience window, a gamepad</dd></div>
+          </dl>
+        </div>
+        <div class="prose">
+          <h2>Installing</h2>
+          <p>The installers aren't code-signed yet, so your system will ask before it opens them the first time.</p>
+          <h3>Windows</h3>
+          <p>If SmartScreen says <em>Windows protected your PC</em>, choose <strong>More info</strong>, then <strong>Run anyway</strong>. You can pick the install folder during setup.</p>
+          <h3>Mac</h3>
+          <p>Drag AetherStar into Applications. If macOS says it can't check the app, open <strong>System Settings › Privacy &amp; Security</strong> and choose <strong>Open Anyway</strong>. Allow microphone access when asked, the app needs it to hear you sing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" style="margin-top:var(--section)">
+      <div class="cols">
+        <div class="prose">
+          <h2>New in 1.1</h2>
+          <ul class="changes">
+            <li>SingStar-style scoring: 10,000 points per singer, a verdict on every line, golden notes, the classic rank ladder</li>
+            <li>Difficulty per singer: Easy, Normal or Hard, within 2, 1 or 0 semitones</li>
+            <li>A note lane paged one line at a time with a sweeping playhead</li>
+            <li>Pause menu, Jukebox, favourites, play history and highscores per song</li>
+            <li>Every song plays at about the same volume, plus a volume mixer</li>
+            <li>Faster pitch detection, a smoother song list, and many fixes</li>
+            <li>Menus in English and German, and room for more languages</li>
+          </ul>
+        </div>
+        <div class="prose">
+          <h2>Source code</h2>
+          <p>AetherStar is open source under the MIT licence. The code, the issue tracker and every release are on <a class="ext" href="https://github.com/D3FXgit/Eather-Star" rel="noopener">GitHub</a>.</p>
+          <p>To build it yourself you need Node.js 22 and a Rust toolchain, plus Xcode Command Line Tools on a Mac or the Visual Studio Build Tools on Windows.</p>
+<pre class="code"><code>npm install
+npm run dev     # run from source
+npm run dist    # build installers</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="wrap faq__grid">
+        <h2 class="h2">Questions</h2>
+        <div class="faq__list">
+          <details class="qa">
+            <summary>Where do I get songs?</summary>
+            <div class="qa__body"><p>AetherStar plays songs in the UltraStar format. It doesn't include or download any. The <a href="songs.html">Songs page</a> explains the format, the USDB database and USDB Syncer.</p></div>
+          </details>
+          <details class="qa">
+            <summary>Which microphones work?</summary>
+            <div class="qa__body"><p>Any microphone your computer can see: USB mics, headsets, or the inputs of an audio interface, one channel per singer. Mic check shows a live tuner for each input, so you can test before the party.</p></div>
+          </details>
+          <details class="qa">
+            <summary>Do I have to sing in the original octave?</summary>
+            <div class="qa__body"><p>No. Any octave counts. AetherStar compares the note you sing, not how high or low you sing it.</p></div>
+          </details>
+          <details class="qa">
+            <summary>My speakers are Bluetooth. Is that a problem?</summary>
+            <div class="qa__body"><p>Run the calibration once in Settings. It measures how late your speakers and mic are and shifts the scoring to match.</p></div>
+          </details>
+          <details class="qa">
+            <summary>Does AetherStar send anything over the internet?</summary>
+            <div class="qa__body"><p>No. Songs, players and scores stay on your computer, and your voice is analysed on the device.</p></div>
+          </details>
+          <details class="qa">
+            <summary>What does it cost?</summary>
+            <div class="qa__body"><p>Nothing. AetherStar is free and open source under the MIT licence.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div class="foot__col foot__about">
+          <p class="foot__note">AetherStar is free party karaoke for UltraStar songs, made by <a href="https://github.com/D3FXgit" rel="noopener">D3FXgit</a> and released under the MIT licence.</p>
+          <p class="foot__note">An independent fan project. Not affiliated with or endorsed by Sony Interactive Entertainment. SingStar is a trademark of Sony Interactive Entertainment. UltraStar Deluxe, USDB and USDB Syncer are separate projects run by their own communities.</p>
+        </div>
+        <nav class="foot__col" aria-label="Site">
+          <h2>Site</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="songs.html">Songs</a></li>
+            <li><a href="download.html">Download</a></li>
+          </ul>
+        </nav>
+        <nav class="foot__col" aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="https://github.com/D3FXgit/Eather-Star" rel="noopener">Source code on GitHub</a></li>
+            <li><a href="index.html#origins">Where it comes from</a></li>
+            <li><a href="legal.html">Privacy · Datenschutz</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+</body>
+</html>

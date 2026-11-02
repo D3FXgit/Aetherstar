@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Features · AetherStar</title>
+  <meta name="description" content="How a night with AetherStar goes, how scoring works, the game modes, the second screen and mic setup.">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta property="og:title" content="Features · AetherStar">
+  <meta property="og:description" content="How a night with AetherStar goes, how scoring works, the game modes, the second screen and mic setup.">
+  <meta property="og:image" content="https://aetherstar.dev/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://aetherstar.dev/features.html">
+  <meta property="og:site_name" content="AetherStar">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://aetherstar.dev/features.html">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/archivo-var.woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar" data-bar>
+    <div class="bar__inner">
+      <a class="wordmark" href="index.html" aria-label="AetherStar home">AETHERSTAR</a>
+      <nav class="bar__nav" aria-label="Pages">
+        <a href="features.html" aria-current="page">Features</a><a href="songs.html">Songs</a><a href="https://github.com/D3FXgit/Eather-Star" rel="noopener" class="ext">GitHub</a>
+      </nav>
+      <a class="btn btn--small" href="download.html">Download</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="wrap page-head">
+      <h1>Features</h1>
+      <p class="lead">What happens from picking a song to the final rank, and what you set up once beforehand.</p>
+    </header>
+
+    <!-- How a night goes: sticky screen on desktop, stacked on phones -->
+    <section class="night" id="night">
+      <div class="wrap">
+        <h2 class="h2">How a night goes</h2>
+        <div class="night__grid">
+          <ol class="night__steps">
+            <li class="step" data-step="0">
+              <h3 class="h3">1. Start a night</h3>
+              <p>Open AetherStar and the menu is already playing something from your library. The line under the buttons tells you how many mics are ready before anyone picks one up.</p>
+              <button class="shot step__img" type="button" data-full="img/home-2560.webp" data-caption="Home: the menu plays music from your library." aria-label="Enlarge screenshot: Home: the menu plays music from your library."><img src="img/home-1280.webp" srcset="img/home-1280.webp 1280w, img/home-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="The AetherStar home screen with Start a night, Jukebox, Settings and Exit." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+            </li>
+            <li class="step" data-step="1">
+              <h3 class="h3">2. Pick a song</h3>
+              <p>Browse by cover, jump by letter, filter for duets or a language, or hit Random. Each song shows its length and the highscore to beat.</p>
+              <button class="shot step__img" type="button" data-full="img/song-select-2560.webp" data-caption="Song select." aria-label="Enlarge screenshot: Song select."><img src="img/song-select-1280.webp" srcset="img/song-select-1280.webp 1280w, img/song-select-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="The song list: a grid of covers, the selected song&#x27;s details on the left, and a jump-to-letter column on the right." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+            </li>
+            <li class="step" data-step="2">
+              <h3 class="h3">3. Choose who's singing</h3>
+              <p>Tap players in order and they take mic 1, mic 2 and so on. Each singer sets their own difficulty, so a nervous first-timer and a show-off can share a song.</p>
+              <button class="shot step__img" type="button" data-full="img/whos-singing-2560.webp" data-caption="Who&#x27;s singing." aria-label="Enlarge screenshot: Who&#x27;s singing."><img src="img/whos-singing-1280.webp" srcset="img/whos-singing-1280.webp 1280w, img/whos-singing-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="The Who&#x27;s singing screen: Mira on mic 1 and Jonas on mic 2, both on Normal." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+            </li>
+            <li class="step" data-step="3">
+              <h3 class="h3">4. Sing</h3>
+              <p>A short countdown, then the song. Notes arrive one line at a time with a playhead sweeping across, the lyrics fill as you go, and every line gets its verdict the moment it ends.</p>
+              <button class="shot step__img" type="button" data-full="img/countdown-2560.webp" data-caption="The countdown before the first line." aria-label="Enlarge screenshot: The countdown before the first line."><img src="img/countdown-1280.webp" srcset="img/countdown-1280.webp 1280w, img/countdown-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="The countdown before Amazing Grace starts: a 2 over the note lanes and a stage photo." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+            </li>
+          </ol>
+          <div class="night__stage">
+            <button class="stage" type="button" aria-label="Enlarge the current screenshot">
+              <img class="stage__img is-active" src="img/home-1280.webp" srcset="img/home-1280.webp 1280w, img/home-2560.webp 2560w" sizes="60vw" width="2560" height="1440" alt="">
+              <img class="stage__img" loading="lazy" src="img/song-select-1280.webp" srcset="img/song-select-1280.webp 1280w, img/song-select-2560.webp 2560w" sizes="60vw" width="2560" height="1440" alt="">
+              <img class="stage__img" loading="lazy" src="img/whos-singing-1280.webp" srcset="img/whos-singing-1280.webp 1280w, img/whos-singing-2560.webp 2560w" sizes="60vw" width="2560" height="1440" alt="">
+              <img class="stage__img" loading="lazy" src="img/countdown-1280.webp" srcset="img/countdown-1280.webp 1280w, img/countdown-2560.webp 2560w" sizes="60vw" width="2560" height="1440" alt="">
+              <span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scoring: full cyan field -->
+    <section class="scoring" id="scoring">
+      <div class="wrap">
+        <h2 class="h2">How scoring works</h2>
+        <p class="statement">Every singer is scored against the part they actually sang. A duet partner with half the lines can still reach 10,000.</p>
+
+        <div class="split" data-split>
+          <div class="split__bar">
+            <span class="split__notes"><b>9,000</b> for notes</span>
+            <span class="split__lines"><b>1,000</b> for lines</span>
+          </div>
+          <div class="split__copy">
+            <p><strong>Notes</strong> share 9,000 points by length, so a long held note is worth more than a quick one. Golden notes count double. There is no combo multiplier, so one bad line never wipes out a good verse.</p>
+            <p><strong>Lines</strong> share the other 1,000. When a line ends it gets a verdict on the share of its notes you hit: Perfect from 95%, Great from 80%, Good from 60%, OK from 40%.</p>
+          </div>
+        </div>
+
+        <div class="ladder" data-ladder>
+          <div class="ladder__readout">
+            <label class="ladder__label" for="score-input">Drag the slider or tap a rank</label>
+            <output class="ladder__score" id="score-out" for="score-input">7,300</output>
+            <p class="ladder__rank"><span data-rank>Lead Singer</span> <span class="stars" data-stars aria-label="4 of 5 stars">★★★★<span>★</span></span></p>
+            <input class="range" type="range" id="score-input" min="0" max="10000" step="50" value="7300">
+          </div>
+          <table class="ladder__table">
+            <caption class="sr-only">AetherStar ranks and the score each one starts at</caption>
+            <thead><tr><th scope="col">From</th><th scope="col">Rank</th></tr></thead>
+            <tbody>
+              <tr data-min="9000"><td>9,000</td><td>Superstar</td></tr>
+              <tr data-min="8000"><td>8,000</td><td>Hit Machine</td></tr>
+              <tr data-min="7000"><td>7,000</td><td>Lead Singer</td></tr>
+              <tr data-min="6000"><td>6,000</td><td>Rising Star</td></tr>
+              <tr data-min="5000"><td>5,000</td><td>Hopeful</td></tr>
+              <tr data-min="4000"><td>4,000</td><td>Wannabe</td></tr>
+              <tr data-min="2000"><td>2,000</td><td>Amateur</td></tr>
+              <tr data-min="0"><td>0</td><td>Tone Deaf</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="difficulty">
+          <h3 class="h3">Difficulty</h3>
+          <p>Difficulty is per singer. It sets how close you have to be to the written note. Any octave counts, so a low voice can sing a high song.</p>
+          <dl class="tolerance">
+            <div><dt>Easy</dt><dd><span class="band" style="--st:2"></span>within 2 semitones</dd></div>
+            <div><dt>Normal</dt><dd><span class="band" style="--st:1"></span>within 1 semitone</dd></div>
+            <div><dt>Hard</dt><dd><span class="band" style="--st:0"></span>on the note</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="modes" id="modes">
+      <div class="wrap">
+        <h2 class="h2">Game modes</h2>
+        <div class="modes__grid">
+          <div class="modes__party">
+            <button class="shot" type="button" data-full="img/party-2560.webp" data-caption="Party mode: singers drawn least-sung first, three mystery songs." aria-label="Enlarge screenshot: Party mode: singers drawn least-sung first, three mystery songs."><img src="img/party-1280.webp" srcset="img/party-1280.webp 1280w, img/party-2560.webp 2560w" sizes="(max-width: 900px) 100vw, 62vw" width="2560" height="1440" alt="Party mode, called Mystery roulette: Jonas on mic 1 and Theo on mic 2, each with a Pass the mic button, above three mystery songs." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+          </div>
+          <div class="modes__text">
+            <div class="mode">
+              <h3 class="h3">Party</h3>
+              <p>Nobody has to volunteer. AetherStar draws tonight's singers, least-sung first, and deals three mystery songs. Pass the mic to someone on the bench and it deals again.</p>
+            </div>
+            <div class="mode">
+              <h3 class="h3">Versus</h3>
+              <p>A duel. Two singers, one song, and a tug-of-war bar over the video that shows who's ahead as it happens.</p>
+            </div>
+            <div class="mode">
+              <h3 class="h3">Solo and Duet</h3>
+              <p>Sing on your own, or split a duet. Each part goes to its own singer and each singer is scored on their own part.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="audience">
+      <div class="wrap audience__grid">
+        <div class="audience__text">
+          <h2 class="h2">Second screen</h2>
+          <p>Turn on Second screen and AetherStar opens an audience window on another monitor or the TV, with the lyrics, the notes and a live scoreboard. The laptop keeps the menus, so nobody has to watch you scroll.</p>
+          <p>Between songs, Jukebox plays your library with its videos and a queue anyone can add to.</p>
+        </div>
+        <div class="audience__shot">
+          <button class="shot" type="button" data-full="img/audience-2560.webp" data-caption="The audience window, made for a TV across the room." aria-label="Enlarge screenshot: The audience window, made for a TV across the room."><img src="img/audience-1280.webp" srcset="img/audience-1280.webp 1280w, img/audience-2560.webp 2560w" sizes="(max-width: 900px) 100vw, 58vw" width="2560" height="1382" alt="The audience window during Amazing Grace: big lyrics with the current word filled, both singers&#x27; note lanes, and score badges for Mira and Jonas." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="setup">
+      <div class="wrap">
+        <h2 class="h2">Setup</h2>
+        <div class="setup__grid">
+          <div>
+            <h3 class="h3">Mics</h3>
+            <p>Eight mic slots. Each one can be a USB mic or one channel of an audio interface. Sing into a mic and its level bar moves, so you know which is which. Mic check shows a live tuner for every input.</p>
+            <h3 class="h3" style="margin-top:40px">Timing</h3>
+            <p>A short calibration measures your speaker and mic delay, so Bluetooth speakers don't cost anyone points. Every song plays at about the same volume, and there's a mixer for the rest.</p>
+            <h3 class="h3" style="margin-top:40px">Controls</h3>
+            <p>Keyboard, mouse or gamepad, everywhere in the app. Menus come in English and German, and a new language is one text file.</p>
+          </div>
+          <div class="setup__mics">
+            <button class="shot" type="button" data-full="img/mics-2560.webp" data-caption="Settings, Audio and Mics." aria-label="Enlarge screenshot: Settings, Audio and Mics."><img src="img/mics-1280.webp" srcset="img/mics-1280.webp 1280w, img/mics-2560.webp 2560w" sizes="(max-width: 900px) 100vw, 50vw" width="2560" height="1440" alt="Settings, Audio and Mics: volume sliders, then Mic 1 to Mic 8, each with a device, channel and level meter." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="cta">
+        <div>
+          <h2 class="h2">Ready for the first song?</h2>
+          <p>Download AetherStar, then grab a few songs.</p>
+        </div>
+        <a class="btn" href="download.html">Download</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div class="foot__col foot__about">
+          <p class="foot__note">AetherStar is free party karaoke for UltraStar songs, made by <a href="https://github.com/D3FXgit" rel="noopener">D3FXgit</a> and released under the MIT licence.</p>
+          <p class="foot__note">An independent fan project. Not affiliated with or endorsed by Sony Interactive Entertainment. SingStar is a trademark of Sony Interactive Entertainment. UltraStar Deluxe, USDB and USDB Syncer are separate projects run by their own communities.</p>
+        </div>
+        <nav class="foot__col" aria-label="Site">
+          <h2>Site</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="songs.html">Songs</a></li>
+            <li><a href="download.html">Download</a></li>
+          </ul>
+        </nav>
+        <nav class="foot__col" aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="https://github.com/D3FXgit/Eather-Star" rel="noopener">Source code on GitHub</a></li>
+            <li><a href="index.html#origins">Where it comes from</a></li>
+            <li><a href="legal.html">Privacy · Datenschutz</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+</body>
+</html>

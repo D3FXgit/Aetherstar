@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Songs · AetherStar</title>
+  <meta name="description" content="AetherStar plays UltraStar songs. How a song folder looks, where the community shares charts (USDB), and how USDB Syncer helps.">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta property="og:title" content="Songs · AetherStar">
+  <meta property="og:description" content="AetherStar plays UltraStar songs. How a song folder looks, where the community shares charts (USDB), and how USDB Syncer helps.">
+  <meta property="og:image" content="https://aetherstar.dev/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://aetherstar.dev/songs.html">
+  <meta property="og:site_name" content="AetherStar">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://aetherstar.dev/songs.html">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/archivo-var.woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar" data-bar>
+    <div class="bar__inner">
+      <a class="wordmark" href="index.html" aria-label="AetherStar home">AETHERSTAR</a>
+      <nav class="bar__nav" aria-label="Pages">
+        <a href="features.html">Features</a><a href="songs.html" aria-current="page">Songs</a><a href="https://github.com/D3FXgit/Eather-Star" rel="noopener" class="ext">GitHub</a>
+      </nav>
+      <a class="btn btn--small" href="download.html">Download</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="wrap page-head">
+      <h1>Getting songs</h1>
+      <p class="lead">AetherStar plays UltraStar songs, the format UltraStar Deluxe and other fan-made karaoke games use. It doesn't come with any, so here's how to build a library.</p>
+    </header>
+
+    <section class="wrap">
+      <div class="cols">
+        <div class="prose">
+          <h2>What a song is</h2>
+          <p>An UltraStar song is a folder. Inside is a text chart with the notes, timing and lyrics, plus the audio, and if you have them a video and a cover. Put all your song folders in one place and add that folder in AetherStar.</p>
+<pre class="code"><code>Songs/
+  Artist - Title/
+    Artist - Title.txt        the chart
+    Artist - Title.mp3        the audio
+    Artist - Title.mp4        optional video
+    Artist - Title [CO].jpg   optional cover</code></pre>
+          <p>Duets, separate vocal and instrumental stems and older Windows text encodings work. A song that can't play, for example because its audio file is missing, is marked in the list instead of stopping the scan.</p>
+        </div>
+        <div>
+          <button class="shot" type="button" data-full="img/song-select-2560.webp" data-caption="A scanned library in the song list." aria-label="Enlarge screenshot: A scanned library in the song list."><img src="img/song-select-1280.webp" srcset="img/song-select-1280.webp 1280w, img/song-select-2560.webp 2560w" sizes="(max-width: 900px) 100vw, 50vw" width="2560" height="1440" alt="The AetherStar song list with twenty demo songs." loading="lazy"><span class="shot__hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6V2.5H6M13.5 6V2.5H10M2.5 10v3.5H6M13.5 10v3.5H10"/></svg>Enlarge</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" style="margin-top:var(--section)">
+      <div class="cols">
+        <div class="prose">
+          <h2>USDB, the song database</h2>
+          <p><a class="ext" href="https://usdb.animux.de/" rel="noopener">USDB</a> is the community database for UltraStar charts. Fans write the charts and share them there. You need a free account to download.</p>
+          <p>A chart from USDB is only the text file: notes, timing and lyrics. The music, video and cover aren't part of it, and the chart says which recording it was timed to.</p>
+        </div>
+        <div class="prose">
+          <h2>USDB Syncer</h2>
+          <p><a class="ext" href="https://github.com/bohning/usdb_syncer" rel="noopener">USDB Syncer</a> is a separate open-source app that downloads charts from USDB and keeps them up to date when their authors fix something. It can also fetch the media a chart points to, and it writes one folder per song.</p>
+          <p>AetherStar reads those folders as they are. Point it at USDB Syncer's song folder and every song you sync turns up after a rescan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" style="margin-top:var(--section)">
+      <div class="cols">
+        <div class="prose">
+          <h2>Add the folder in AetherStar</h2>
+          <p>Open <strong>Settings › Song Folders</strong>, choose <strong>Add a folder</strong> and pick the top folder of your songs. AetherStar scans it with all its subfolders and remembers it. After you add or change songs, use <strong>Rescan</strong>. You can add more than one folder.</p>
+          <p>If no songs are set up yet, the song list shows an <strong>Add library folder</strong> button too.</p>
+          <div class="note">
+            <p><strong>Mind the copyright.</strong> Charts are made by fans, but the songs, videos and cover art belong to their rights holders. Only use files you're allowed to use, for example music you bought, recorded yourself, or that is in the public domain. AetherStar only plays files you already have and downloads nothing.</p>
+          </div>
+        </div>
+        <div class="prose">
+          <h2>Tags AetherStar reads</h2>
+          <table class="tags">
+            <thead><tr><th scope="col">Tag</th><th scope="col">Use</th></tr></thead>
+            <tbody>
+              <tr><td><code>#TITLE</code>, <code>#ARTIST</code></td><td>Song name and artist</td></tr>
+              <tr><td><code>#MP3</code>, <code>#AUDIO</code></td><td>The audio file. <code>#AUDIO</code> wins if both are there.</td></tr>
+              <tr><td><code>#BPM</code>, <code>#GAP</code></td><td>Tempo, and the delay before the first note</td></tr>
+              <tr><td><code>#VIDEO</code>, <code>#VIDEOGAP</code></td><td>Background video and its offset</td></tr>
+              <tr><td><code>#COVER</code>, <code>#BACKGROUND</code></td><td>Cover art, and a picture behind the lyrics</td></tr>
+              <tr><td><code>#START</code>, <code>#END</code></td><td>Start or stop part-way through</td></tr>
+              <tr><td><code>#PREVIEWSTART</code></td><td>Where the preview starts in the song list</td></tr>
+              <tr><td><code>#VOCALS</code>, <code>#INSTRUMENTAL</code></td><td>Separate stems</td></tr>
+              <tr><td><code>#LANGUAGE</code>, <code>#EDITION</code></td><td>For filters and search</td></tr>
+              <tr><td><code>#RELATIVE</code>, <code>#ENCODING</code></td><td>Older chart styles and text encodings</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="cta">
+        <div>
+          <h2 class="h2">Got a few songs?</h2>
+          <p>Then all that's missing is the app.</p>
+        </div>
+        <a class="btn" href="download.html">Download AetherStar</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div class="foot__col foot__about">
+          <p class="foot__note">AetherStar is free party karaoke for UltraStar songs, made by <a href="https://github.com/D3FXgit" rel="noopener">D3FXgit</a> and released under the MIT licence.</p>
+          <p class="foot__note">An independent fan project. Not affiliated with or endorsed by Sony Interactive Entertainment. SingStar is a trademark of Sony Interactive Entertainment. UltraStar Deluxe, USDB and USDB Syncer are separate projects run by their own communities.</p>
+        </div>
+        <nav class="foot__col" aria-label="Site">
+          <h2>Site</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="songs.html">Songs</a></li>
+            <li><a href="download.html">Download</a></li>
+          </ul>
+        </nav>
+        <nav class="foot__col" aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="https://github.com/D3FXgit/Eather-Star" rel="noopener">Source code on GitHub</a></li>
+            <li><a href="index.html#origins">Where it comes from</a></li>
+            <li><a href="legal.html">Privacy · Datenschutz</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+</body>
+</html>

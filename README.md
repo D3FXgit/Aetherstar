@@ -61,7 +61,7 @@ GitHub Pages serves `404.html` for missing pages on its own.
 - **Check the domain's WHOIS privacy.** Make sure your registrar hides your name and
   address in the public WHOIS/RDAP record for aetherstar.dev, or the domain gives you away.
 - **Make the GitHub repo public and publish a release.** All download buttons point to
-  `https://github.com/D3FXgit/Eather-Star/releases/latest`. GitHub Pages can't host the
+  `https://github.com/D3FXgit/Aetherstar/releases/latest`. GitHub Pages can't host the
   installers themselves (100 MB file limit), so releases are the right place.
 
 ## Screenshots

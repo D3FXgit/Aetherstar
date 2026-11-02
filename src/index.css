@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* The app's stylesheets, split by concern. Order matters only for the cascade
+   between files, which none of them currently rely on. */
+@import "./styles/tokens.css";
+@import "./styles/base.css";
+@import "./styles/animations.css";
+@import "./styles/gameplay-fx.css";

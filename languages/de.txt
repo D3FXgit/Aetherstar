@@ -1,0 +1,549 @@
+@code: de
+@name: Deutsch
+
+# AetherStar -- Deutsch
+# Format und Anleitung: siehe Kopf von en.txt und docs/translating.md.
+# Ton: du-Form, locker und kurz -- wie ein Partyspiel, nicht wie ein Handbuch.
+
+# --- Allgemein ---------------------------------------------------------------
+common.selected = Ausgewählt
+common.select = Auswählen
+common.percent = {value} %
+
+# --- Einstellungen: Bildschirm und Reiter ------------------------------------
+settings.title = Einstellungen
+settings.nav.label = Einstellungsbereiche
+settings.tabs.audio = Audio & Mikros
+settings.tabs.songs = Song-Ordner
+settings.tabs.graphics = Grafik
+
+# --- Einstellungen > Audio & Mikros > Lautstärke -----------------------------
+settings.volume.title = Lautstärke
+settings.volume.sliderLabel = Lautstärke {channel}
+settings.volume.master.label = Gesamt
+settings.volume.master.description = Alles, was das Spiel abspielt.
+settings.volume.music.label = Musik
+settings.volume.music.description = Der Song, zu dem du singst, und die Song-Vorschauen.
+settings.volume.guideVocals.label = Originalgesang
+settings.volume.guideVocals.description = Die Originalstimme bei Songs, die eine eigene Gesangsspur mitbringen.
+settings.volume.effects.label = Effekte
+settings.volume.effects.description = Klicks, Jubel und Punkte-Sounds.
+settings.volume.menuMusic.label = Menümusik
+settings.volume.menuMusic.description = Die Musik im Hintergrund der Menüs.
+settings.volume.menuMusicSource.label = Quelle der Menümusik
+settings.volume.menuMusicSource.description = Zufällige Songs aus deiner Bibliothek, der eingebaute Track oder Stille.
+settings.volume.menuMusicSource.library = Songs aus deiner Bibliothek
+settings.volume.menuMusicSource.builtin = Eingebauter Track
+settings.volume.menuMusicSource.off = Aus
+
+# --- Einstellungen > Audio & Mikros > Mikrofone ------------------------------
+settings.mics.title = Mikrofone
+settings.mics.hint = Wer singt, schnappt sich beim Songstart ein Mikro.
+settings.mics.check.label = Mikro-Check
+settings.mics.check.none = Keine Mikros gefunden.
+settings.mics.check.count.one = {count} Audioeingang erkannt.
+settings.mics.check.count.other = {count} Audioeingänge erkannt.
+settings.mics.check.action = Mikro-Check öffnen
+settings.mics.timing.label = Timing
+settings.mics.timing.description = Bring Boxen und Mikros in Sync.
+settings.mics.timing.action = Kalibrierung öffnen
+settings.mics.players.label = Spieler
+settings.mics.players.none = Noch keine Spieler da.
+settings.mics.players.count.one = {count} Spieler in deiner Truppe.
+settings.mics.players.count.other = {count} Spieler in deiner Truppe.
+settings.mics.players.action = Spieler verwalten
+
+# --- Einstellungen > Audio & Mikros > Karaoke-Effekt -------------------------
+settings.monitor.title = Karaoke-Effekt
+settings.monitor.hear.label = Mikros über die Boxen
+settings.monitor.hear.description = Eure Stimmen kommen beim Singen aus den Boxen, leiser als der Song.
+settings.monitor.level.label = Mikro-Lautstärke
+settings.monitor.level.description = Wenn es pfeift, dreh runter oder geh mit dem Mikro weiter weg von den Boxen.
+settings.monitor.level.disabled = Schalte „Mikros über die Boxen“ ein, um die Lautstärke einzustellen.
+
+# --- Einstellungen > Song-Ordner ---------------------------------------------
+settings.library.title = Song-Ordner
+settings.library.rescan = Neu einlesen
+settings.library.remove = Entfernen
+settings.library.add.label = Ordner hinzufügen
+settings.library.add.empty = Noch keine Song-Ordner drin.
+settings.library.add.more = Noch einen Ordner mit UltraStar-Songs einlesen.
+
+# --- Einstellungen > Grafik --------------------------------------------------
+settings.window.title = Fenster
+settings.window.windowed.label = Fenstermodus
+settings.window.windowed.descriptionMac = Im Fenster spielen, oder nimm den grünen Knopf bzw. Control-Command-F.
+settings.window.windowed.description = Im Fenster statt im Vollbild spielen.
+
+settings.display.title = Bildschirme
+settings.display.second.label = Zweiter Bildschirm
+settings.display.second.description = Zeig die Punktetafel fürs Publikum auf einem zweiten Monitor.
+settings.display.second.toggle = Zweiten Bildschirm einschalten
+settings.display.empty = Keine Bildschirme gefunden.
+settings.display.primary = Hauptbildschirm
+
+settings.fx.reduce.label = Weniger Effekte
+settings.fx.reduce.description = Weniger Partikel und schlichtere Grafik, für schwächere Rechner.
+
+# --- Einstellungen > Grafik > Sprache ----------------------------------------
+settings.language.title = Sprache
+settings.language.auto.label = Automatisch
+settings.language.auto.description = Nimmt deine Systemsprache ({language}).
+settings.language.source.bundled = Mitgeliefert
+settings.language.source.user = Aus deinem Sprachordner
+settings.language.missing.one = {count} Text noch nicht übersetzt
+settings.language.missing.other = {count} Texte noch nicht übersetzt
+settings.language.use = Nehmen
+settings.language.useLabel = {language} nehmen
+settings.language.folder.label = Eigene Sprache hinzufügen
+settings.language.folder.description = Leg eine übersetzte .txt-Datei in den Sprachordner, dann taucht sie hier auf.
+settings.language.folder.action = Sprachordner öffnen
+
+# --- Startbildschirm ----------------------------------------------------------
+home.tagline = Singt zusammen
+home.start = Abend starten
+home.jukebox = Jukebox
+home.settings = Einstellungen
+home.exit = Beenden
+home.mics.none = Kein Mikro gefunden
+home.mics.ready.one = {count} Mikro bereit
+home.mics.ready.other = {count} Mikros bereit
+home.mics.looking = Suche nach Mikros…
+home.nowPlaying = Läuft gerade: {title} – {artist}
+
+# --- Gemeinsame Bedienelemente (Dialoge, Fehleranzeigen) ----------------------
+ui.dialog.cancel = Abbrechen
+ui.error.title = Da ist was schiefgelaufen
+ui.error.message = Geh zurück ins Menü und versuch es nochmal.
+ui.error.retry = Zurück ins Menü
+ui.error.showDetails = Details anzeigen
+ui.error.logged = Der vollständige Fehler steht in der Konsole unter {prefix}.
+scene.back = Zurück
+
+# results
+# --- Ergebnisse ---------------------------------------------------------------
+results.title = Ergebnisse
+results.empty = Noch keine Ergebnisse.
+results.skip = Überspringen
+results.winner = Gewonnen!
+results.versus.winner = Versus gewonnen!
+results.versus.tieLabel = Gleichstand!
+results.versus.wins = {name} gewinnt!
+results.versus.margin = Schlägt {name} mit {points} Punkten Vorsprung
+results.versus.tie = Unentschieden!
+results.versus.tieScore = Beide mit {score} Punkten
+results.highscore = Neuer Highscore!
+results.mic = Mikro {number}
+results.notes.epic = Episch {count}
+results.notes.good = Gut {count}
+results.notes.missed = Verpasst {count}
+# Wie viele Zeilen welches Urteil bekommen haben, auf dem Ergebnis-Screen.
+results.lines.perfect = Perfekt ×{count}
+results.lines.great = Super ×{count}
+results.lines.good = Gut ×{count}
+results.lines.ok = OK ×{count}
+results.alsoSinging = Auch dabei
+results.actions.rematch = Revanche
+results.actions.newSong = Neuen Song wählen
+results.actions.leave = Beenden
+results.actions.leaderboard = Bestenliste
+results.singers.one = {count} Stimme
+results.singers.other = {count} Stimmen
+results.announce.winner = {name} gewinnt mit {score} Punkten an Mikro {mic}.
+results.announce.rating = {rank}, {count} von 5 Sternen.
+results.announce.others = Außerdem dabei: {list}.
+results.announce.other = {name}, {score} Punkte, {rank}
+results.announce.otherWithHighscore = {name}, {score} Punkte, {rank}, neuer Highscore
+# Rangtitel bleiben englisch, wie in klassischen Party-Karaoke-Spielen.
+results.rank.toneDeaf = Tone Deaf
+results.rank.amateur = Amateur
+results.rank.wannabe = Wannabe
+results.rank.hopeful = Hopeful
+results.rank.risingStar = Rising Star
+results.rank.leadSinger = Lead Singer
+results.rank.hitMachine = Hit Machine
+results.rank.superstar = Superstar
+
+# party
+# --- Partymodus (Mystery-Roulette) ----------------------------------------------
+party.title = Mystery-Roulette
+party.loading = Das Roulette läuft gleich an…
+party.noMics.title = Noch keine Mikros eingerichtet.
+party.noMics.description = Für den Partymodus brauchst du mindestens ein Mikro. Richte eins ein und dreh nochmal.
+party.noMics.action = Mikros einrichten
+party.noPlayers.title = Noch keine Spieler angelegt.
+party.noPlayers.description = Leg mindestens einen Spieler an, damit jemand gezogen werden kann.
+party.noPlayers.action = Spieler anlegen
+party.mode.label = Spielmodus
+party.singers.title = Heute am Mikro
+party.singers.hint = Fair gezogen, wer am wenigsten gesungen hat, zuerst
+party.count.label = Stimmen
+party.count.option.one = {count} Stimme
+party.count.option.other = {count} Stimmen
+party.mic = Mikro {number}
+party.unknownPlayer = Jemand
+party.slot.firstSong = Heute der erste Song
+party.slot.sung.one = Heute schon einmal gesungen
+party.slot.sung.other = Heute schon {count}-mal gesungen
+party.slot.pass = Mikro weitergeben
+party.slot.passHint = Gib das Mikro an jemanden von der Bank weiter
+party.slot.passDisabled = Niemand mehr auf der Bank
+party.songs.title.one = Dein Mystery-Song
+party.songs.title.other = Such dir einen von {count} Mystery-Songs aus
+party.songs.hint = Mikro weitergeben bringt auch neue Songs
+party.songs.selected = Ausgewählt
+party.songs.best = Rekord: {score} von {name}
+party.songs.noBest = Noch kein Rekord
+party.songs.duet = Duett
+party.songs.video = Video
+party.footer.upNext = Als Nächstes: {title}
+party.footer.pick = Such dir einen Song aus
+party.start = Jetzt singen
+
+# --- Spieler (Truppe) -----------------------------------------------------------
+players.title = Spieler
+players.subtitle = Zieh die Karten, um eure Reihenfolge für heute Abend festzulegen.
+players.add = Spieler hinzufügen
+players.card.edit = Bearbeiten
+players.card.delete = Löschen
+players.card.editLabel = {name} bearbeiten
+players.card.deleteLabel = {name} löschen
+players.form.name = Name
+players.form.color = Farbe {number}
+players.form.choosePhoto = Foto wählen
+players.form.dropHint = Oder zieh ein Foto hierher.
+players.form.cancel = Abbrechen
+players.form.save = Speichern
+players.crop.cancel = Abbrechen
+players.crop.use = Foto übernehmen
+
+# --- Singen > Pausenmenü ------------------------------------------------------
+# pause
+sing.pause.title = Pause
+sing.pause.song = {title} · {artist}
+sing.pause.resume = Weiter
+sing.pause.restart = Song neu starten
+sing.pause.quit = Zurück zur Songauswahl
+sing.pause.quitParty = Party beenden
+sing.pause.getReady = Mach dich bereit
+
+# --- Singen > Der Song --------------------------------------------------------
+# gameplay
+sing.loading.title = Song wird geladen
+sing.loadError.title = Song konnte nicht geladen werden
+sing.loadError.message = Die Songdatei konnte nicht gelesen werden: {error}
+sing.loadError.action = Zurück zur Bibliothek
+sing.mediaError.title = Audio oder Video fehlt
+sing.mediaError.message = Die Audio- oder Videodatei für diesen Song fehlt oder ist nicht lesbar.
+sing.mediaError.action = Song verlassen
+sing.noSong = Kein Song ausgewählt.
+sing.songCard.meta = {artist} · {bpm} BPM · {time}
+sing.micsLive.one = {count} Mikro aktiv
+sing.micsLive.other = {count} Mikros aktiv
+sing.micHealth.noDevice = Kein Mikro gefunden. Es wird nichts gewertet.
+sing.micHealth.noCapture = Mikro läuft nicht. Es wird nichts gewertet.
+sing.micHealth.noFrames = Das Mikro sendet keinen Ton mehr. Es wird nichts gewertet.
+sing.hit.excellent = Klasse
+sing.hit.good = Gut
+sing.hit.bad = Daneben
+sing.hit.golden = Gold!
+sing.lineRating.perfect = Perfekt!
+sing.lineRating.great = Super!
+sing.lineRating.good = Gut
+sing.lineRating.ok = OK
+
+# --- Mikros (die nummerierten Mikro-Plätze) -----------------------------------
+mic.slot = Mikro {number}
+mic.channel.mono = Mono
+mic.channel.left = Links
+mic.channel.right = Rechts
+mic.channel.input = In {number}
+mic.matrix.header.mic = Mikro
+mic.matrix.header.device = Gerät
+mic.matrix.header.channel = Kanal
+mic.matrix.header.level = Pegel
+mic.matrix.header.actions = Aktionen
+mic.matrix.noInput = Kein Eingang
+mic.matrix.noDevices = Noch keine Audioeingänge gefunden; steck eins an, dann taucht es hier auf.
+mic.matrix.conflict = Teilt sich diesen Eingang mit {mics}
+mic.matrix.device.label = Gerät für {mic}
+mic.matrix.channel.label = Kanal für {mic}
+mic.matrix.calibrate.label = {mic} kalibrieren
+mic.matrix.level.label = Eingangspegel von {mic}
+mic.matrix.calibrate.action = Kalibrieren
+mic.identify.action = Antippen zum Erkennen
+mic.identify.listening = Hört zu…
+mic.identify.cancel = Abbrechen
+mic.setup.title = Mikro-Setup
+mic.setup.description = Sing in ein Mikro, dann siehst du, welche Zeile aufleuchtet.
+mic.setup.hint = Mikros 1–8 sind Eingänge, keine Spieler; wer singt, schnappt sich pro Song eins.
+
+# --- Publikumsfenster > Der Song ----------------------------------------------
+audience.sing.getReady = Macht euch bereit
+audience.sing.paused = Pause
+
+# songSelect
+# --- Songauswahl ----------------------------------------------------------------
+songSelect.title = Such dir einen Song aus
+songSelect.count.one = {count} Song
+songSelect.count.other = {count} Songs
+songSelect.mode.classic = Solo/Duett
+songSelect.mode.battle = Versus
+songSelect.mode.party = Party
+songSelect.mode.jukebox = Jukebox
+songSelect.letter.clear = Filter {letter} aufheben
+songSelect.search.label = Songs durchsuchen
+songSelect.search.placeholder.one = {count} Song nach Titel, Interpret oder Edition durchsuchen
+songSelect.search.placeholder.other = {count} Songs nach Titel, Interpret oder Edition durchsuchen
+songSelect.tile.duet = Duett
+songSelect.meta.duet = Duett
+songSelect.meta.video = Video
+songSelect.preview.noCover = Kein Cover
+songSelect.start.sing = Jetzt singen
+songSelect.start.unplayable = Nicht spielbar: Audio fehlt
+songSelect.favorite.label = Favorit
+songSelect.highscore.title = Highscore
+songSelect.highscore.none = Noch kein Highscore
+songSelect.highscore.unknownSinger = Unbekannt
+songSelect.difficulty.easy = Leicht
+songSelect.difficulty.normal = Normal
+songSelect.difficulty.hard = Schwer
+songSelect.jumpTo = Springe zu
+songSelect.empty.title = Noch keine Songbibliothek
+songSelect.empty.description = Füg einen Ordner mit UltraStar-Songs hinzu, dann kannst du stöbern und loslegen.
+songSelect.empty.noMatches = Noch keine passenden Songs.
+library.addFolder = Songordner hinzufügen
+
+# --- Songauswahl > Filterleiste -------------------------------------------------
+songSelect.filter.favorites = Favoriten
+songSelect.filter.duets = Duette
+songSelect.sort.label = Sortierung: {order}
+songSelect.sort.artist = Interpret
+songSelect.sort.title = Titel
+songSelect.sort.recent = Neu hinzugefügt
+songSelect.sort.recentlySung = Zuletzt gesungen
+songSelect.sort.mostSung = Am meisten gesungen
+songSelect.filter.language = Sprache: {language}
+songSelect.filter.languageAll = Alle
+songSelect.filter.random = Zufällig
+songSelect.filter.refresh = Bibliothek aktualisieren
+songSelect.hint.favorite = Favorit
+songSelect.hint.addToQueue = In die Warteschlange
+songSelect.status.indexed.one = {count} Song erfasst
+songSelect.status.indexed.other = {count} Songs erfasst
+songSelect.status.refreshing = Bibliothek wird aktualisiert
+songSelect.status.progressLabel = Fortschritt beim Einlesen
+
+# --- Songauswahl > Songs, die nicht geladen werden konnten ----------------------
+songSelect.scanErrors.button.one = {count} Song konnte nicht geladen werden
+songSelect.scanErrors.button.other = {count} Songs konnten nicht geladen werden
+songSelect.scanErrors.title = Songs, die nicht geladen werden konnten
+songSelect.scanErrors.description = Reparier diese Dateien und aktualisier dann die Bibliothek.
+songSelect.scanErrors.close = Schließen
+
+# --- Songauswahl > Jukebox ------------------------------------------------------
+songSelect.jukebox.title = Such die Musik aus
+songSelect.jukebox.playNow = Jetzt abspielen
+songSelect.jukebox.addToQueue = In die Warteschlange
+songSelect.queue.title = Als Nächstes
+songSelect.queue.count.one = {count} Song
+songSelect.queue.count.other = {count} Songs
+songSelect.queue.empty = Pack Songs in die Warteschlange oder misch die ganze Liste.
+songSelect.queue.remove = {title} aus der Warteschlange nehmen
+songSelect.queue.shuffleAll = Alles mischen
+songSelect.queue.play = Warteschlange abspielen
+
+# jukebox
+# --- Jukebox (läuft) ------------------------------------------------------------
+jukebox.upNext = Als Nächstes
+jukebox.menu.title = Jukebox
+jukebox.menu.resume = Weiterhören
+jukebox.menu.skip = Song überspringen
+jukebox.menu.backToList = Zurück zur Liste
+jukebox.error.title = Dieser Song konnte nicht geladen werden
+jukebox.error.message = Die Notendatei dieses Songs ließ sich nicht lesen: {error}
+jukebox.empty.title = Gerade läuft nichts
+jukebox.empty.message = Such dir einen Song aus der Liste aus, um die Jukebox zu starten.
+# --- Jukebox > Playback controls (the bar over the video) -----------------------
+jukebox.nowPlaying = Läuft gerade
+jukebox.transport.label = Wiedergabe
+jukebox.transport.play = Abspielen
+jukebox.transport.pause = Pause
+jukebox.transport.previous = Zurück
+jukebox.transport.next = Weiter
+jukebox.transport.shuffle = Zufallswiedergabe
+jukebox.transport.repeat.off = Wiederholen: aus
+jukebox.transport.repeat.all = Wiederholen: alle
+jukebox.transport.repeat.one = Wiederholen: dieser Song
+jukebox.transport.queue = Als Nächstes
+jukebox.transport.seek = Position im Song
+jukebox.transport.position = {elapsed} von {total}
+jukebox.transport.remaining = −{time}
+jukebox.transport.volume = Musiklautstärke
+jukebox.transport.mute = Stummschalten
+jukebox.transport.unmute = Ton an
+jukebox.transport.upNext = Als Nächstes: {title} · {artist}
+# --- Jukebox > Up next (the queue panel) ------------------------------------------
+jukebox.queue.count.one = {count} Song in der Warteschlange
+jukebox.queue.count.other = {count} Songs in der Warteschlange
+jukebox.queue.empty = Die Warteschlange ist leer.
+jukebox.queue.emptyHintAutoplay = Danach laufen einfach zufällige Songs weiter.
+jukebox.queue.emptyHintRepeat = Danach laufen die Songs, die du schon gehört hast, noch mal.
+jukebox.queue.moveUp = {title} nach oben schieben
+jukebox.queue.moveDown = {title} nach unten schieben
+jukebox.queue.remove = {title} aus der Warteschlange nehmen
+jukebox.queue.clear = Warteschlange leeren
+jukebox.queue.add = Songs hinzufügen
+jukebox.queue.close = Schließen
+jukebox.queue.autoplay = Zufällige Songs automatisch abspielen
+jukebox.queue.autoplayHint = So läuft die Musik weiter, wenn die Warteschlange leer ist.
+# --- Jukebox > Add songs (the song browser over the video) ------------------------
+jukebox.add.title = Songs hinzufügen
+jukebox.add.hint = Such dir Songs für die Warteschlange aus. Die Musik läuft weiter.
+jukebox.add.added = {title} ist jetzt in der Warteschlange
+jukebox.add.done = Fertig
+jukebox.add.empty = Kein Song passt zu deiner Suche.
+# --- Jukebox > The queue ran out ----------------------------------------------------
+jukebox.finished.title = Warteschlange zu Ende
+jukebox.finished.message = Das war der letzte Song. Pack noch mehr drauf oder geh zurück zur Liste.
+jukebox.finished.add = Songs hinzufügen
+
+# assign
+# --- Wer singt (Spielerauswahl) ---------------------------------------------------
+assign.title = Wer singt?
+assign.mics.none = Noch keine Mikros eingerichtet.
+assign.mics.single = Mikro {number} geht an die erste Person, die du auswählst.
+assign.mics.range = Wer ausgewählt wird, bekommt Mikro {first} bis {last}, in der Reihenfolge deiner Auswahl.
+assign.mics.list = Wer ausgewählt wird, bekommt die Mikros {list}, in der Reihenfolge deiner Auswahl.
+assign.empty.title = Noch keine Spieler
+assign.empty.description = Punkte werden pro Spieler gespeichert, also leg vor dem Singen mindestens einen an.
+assign.empty.action = Spieler anlegen
+assign.addPlayer = Spieler hinzufügen
+assign.start = Jetzt singen
+assign.full.one = Das einzige Mikro ist vergeben. Mehr richtest du unter Einstellungen › Audio & Mikros ein.
+assign.full.other = Alle {count} Mikros sind vergeben. Mehr richtest du unter Einstellungen › Audio & Mikros ein.
+assign.mic = Mikro {number}
+assign.badge.label = {name}, Mikro {number}
+assign.difficulty.label = Schwierigkeit für {name}
+assign.difficulty.easy = Leicht
+assign.difficulty.normal = Normal
+assign.difficulty.hard = Schwer
+assign.difficulty.chip = Schwierigkeit für {name}: {level}
+assign.difficulty.hint = Drück zum Wechseln oder nimm links und rechts
+assign.difficulty.easier = Leichter
+assign.difficulty.harder = Schwerer
+
+# --- Audience screen (TV): line-up, scores, results ---------------------------
+audience.lineup.choosingSong = Song wird ausgesucht…
+audience.lineup.waiting = Wer singt?
+audience.scoreboard.leader = In Führung
+audience.scoreboard.score = Punkte
+# {name} is the singer who just moved into first place.
+audience.live.newLeader = {name} übernimmt die Führung
+# Places on the live score cards.
+audience.live.place.first = 1.
+audience.live.place.second = 2.
+audience.live.place.third = 3.
+# {rank} is the place from 4 upwards.
+audience.live.place.other = {rank}.
+audience.results.empty = Noch keine Ergebnisse.
+audience.results.winner = Gewinner
+
+# leaderboard
+# --- Bestenliste ---------------------------------------------------------------
+leaderboard.title = Bestenliste
+leaderboard.subtitle = Die besten Punktzahlen aller Zeiten
+leaderboard.singAnother = Noch einen Song singen
+leaderboard.empty.title = Noch keine Songs gesungen.
+leaderboard.empty.description = Sing einen Song zu Ende, dann landet deine Punktzahl hier.
+leaderboard.empty.action = Song aussuchen
+leaderboard.notes = {epic} episch · {good} gut
+leaderboard.count.one = {count} Eintrag
+leaderboard.count.other = {count} Einträge
+
+# starting
+# --- Songstart (Countdown) ------------------------------------------------------
+starting.label = {title} startet
+starting.labelWithArtist = {title} von {artist} startet
+starting.untitled = Der Song startet
+starting.countdown = Los geht's in {count}
+starting.cancelHint = Zurück, um den Song zu wechseln
+
+# duel
+# --- Versus: Tauziehen-Balken während des Songs ----------------------------------------
+duel.player = Spieler {number}
+duel.leadChange = Führungswechsel!
+duel.tied = Gleichstand
+duel.lead = {name} +{points} Pkt.
+
+# songLoading
+# --- Song wird geladen --------------------------------------------------------------
+songLoading.title = Song wird geladen
+songLoading.label = {title} wird geladen
+songLoading.cover = Cover
+songLoading.status = Lädt…
+
+# --- Kalibrierung -------------------------------------------------------------
+calibration.title = Kalibrierung
+calibration.description = Bring Boxen und Mikros in Sync, damit jeder Ton genau im Takt landet.
+calibration.setup.description = Starte unten ein Mikro, um loszulegen.
+calibration.setup.noMics = Keine Mikros gefunden.
+calibration.setup.noPlayers = Leg zuerst einen Spieler an.
+calibration.output.title = Boxen-Verzögerung
+calibration.output.description = Drück bei jedem Klick die Leertaste.
+calibration.input.title = Mikro-Verzögerung
+calibration.input.description = Sag bei jedem Klick „tap“ ins Mikro.
+calibration.start = Start
+calibration.progress = {done} von {total}
+calibration.difficulty.title = Schwierigkeit
+calibration.difficulty.easy = Leicht
+calibration.difficulty.normal = Normal
+calibration.difficulty.hard = Schwer
+calibration.next = Weiter
+calibration.range.title = Stimmumfang
+calibration.range.description = Sing einen bequemen tiefen Ton und dann einen bequemen hohen.
+calibration.range.captureLow = Tiefen Ton merken
+calibration.range.captureHigh = Hohen Ton merken
+calibration.range.suggestion.one = Vorschlag: um {count} Halbton verschieben
+calibration.range.suggestion.other = Vorschlag: um {count} Halbtöne verschieben
+calibration.range.shift.label = Verschiebung (Halbtöne)
+calibration.apply = Übernehmen
+calibration.done = Kalibrierung gespeichert.
+calibration.rerun = Nochmal
+calibration.reset = Zurücksetzen
+
+# --- Mikro-Check --------------------------------------------------------------
+micCheck.title = Mikro-Check
+micCheck.description = Sing einen gleichmäßigen Ton und schau, wie jedes Mikro ihn aufnimmt.
+micCheck.tuner.delay.label = Mikro-Verzögerung
+
+# --- Mikroliste und Mikrozugriff (Mikro-Check, Kalibrierung) ------------------
+audio.devices.empty.title = Keine Mikros gefunden
+audio.devices.empty.message = Steck eins ein und such erneut, oder schau in die Sound-Einstellungen deines Systems.
+audio.devices.rescan = Erneut suchen
+audio.devices.start = Starten
+audio.devices.stop = Stoppen
+audio.permission.title = Mikrozugriff nötig
+audio.permission.message = Erlaub den Mikrozugriff in deinen Systemeinstellungen und versuch es dann nochmal.
+audio.permission.retry = Nochmal versuchen
+
+# --- Ein Mikro wurde ausgesteckt ----------------------------------------------
+micRecovery.title.single = {mic} wurde ausgesteckt
+micRecovery.title.several.one = {count} Mikro wurde ausgesteckt
+micRecovery.title.several.other = {count} Mikros wurden ausgesteckt
+micRecovery.guidance.single = Steck es wieder in denselben Anschluss, dann ist {mic} zurück.
+micRecovery.guidance.several = Steck sie wieder in dieselben Anschlüsse, dann sind sie zurück.
+micRecovery.dismiss.single = Ohne {mic} weiter
+micRecovery.dismiss.several = Ohne sie weiter
+micRecovery.openSetup = Mikro-Setup öffnen
+
+# system
+# --- Von der App selbst angezeigt, außerhalb der Spielbildschirme (Systemdialoge) --
+main.startupFailed.title = AetherStar: Einige Funktionen konnten nicht starten
+main.startupFailed.body = Die Song- und Spielerdatenbank ließ sich nicht öffnen, deshalb funktionieren diese Funktionen in dieser Sitzung nicht.\n\n{error}
+main.display.label = Bildschirm {id}
+
+# --- Wer singt? > Versus (ein Duell: genau zwei Leute) ---------------------------
+assign.versus.pickTwo = Versus ist 1 gegen 1: Wähl zwei Leute aus.
+assign.versus.full = Versus ist 1 gegen 1. Wähl jemanden ab, um zu tauschen.
+assign.versus.needsTwoMics = Versus braucht zwei Mikros. Richte unter Einstellungen › Audio & Mikros ein weiteres ein.

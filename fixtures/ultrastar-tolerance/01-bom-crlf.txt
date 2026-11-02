@@ -1,0 +1,11 @@
+﻿#ARTIST:BOM Artist
+#TITLE:CRLF Title
+#MP3:song.mp3
+#BPM:250
+#GAP:1000
+: 0 4 60 Hel
+: 4 4 62 lo 
+- 10
+: 12 4 64 world 
+E 
+this trailing junk is after the E terminator and must be ignored

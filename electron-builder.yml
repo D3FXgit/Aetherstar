@@ -1,0 +1,64 @@
+appId: com.aetherstar.app
+productName: AetherStar
+copyright: Copyright (c) 2026 D3X
+# Installers are named after the version, e.g. AetherStar-1.1.0-win-x64.exe.
+artifactName: ${productName}-${version}-${os}-${arch}.${ext}
+# Never upload from electron-builder itself: .github/workflows/release.yml
+# builds with --publish never and attaches the files to a draft GitHub release.
+publish: null
+# The Electron build of better-sqlite3 is produced by `npm run rebuild:electron`
+# (run by every predist script) and cached in .native-cache/, which the app
+# loads it from (electron/native-binding.cjs). Rebuilding node_modules again
+# here is redundant, so it is off on every platform.
+npmRebuild: false
+directories:
+  output: release
+  buildResources: build
+# Only what the packaged app actually runs: the built renderer + the Electron entry points.
+files:
+  - dist/**/*
+  - electron/**/*
+  - fixtures/**/*
+  - assets/**/*
+  - package.json
+  - native/index.node
+  - native/package.json
+  - .native-cache/**/*
+asarUnpack:
+  - "**/*.node"
+# Language packs ship as plain .txt files OUTSIDE the asar archive
+# (<install>/resources/languages, or Contents/Resources/languages on macOS), so
+# they stay readable and editable with any text editor. electron/main.cjs reads
+# them from process.resourcesPath when packaged; users add their own languages
+# in <userData>/languages (docs/translating.md).
+extraResources:
+  - from: languages
+    to: languages
+    filter:
+      - "*.txt"
+mac:
+  category: public.app-category.music-games
+  target:
+    - dmg
+    - zip
+  extendInfo:
+    NSMicrophoneUsageDescription: AetherStar needs microphone access to detect your pitch while you sing.
+  # Signing and notarization are optional: electron-builder auto-discovers
+  # CSC_LINK/CSC_KEY_PASSWORD and APPLE_ID/APPLE_APP_SPECIFIC_PASSWORD/APPLE_TEAM_ID
+  # from the environment and builds an unsigned app when they're absent
+  # (scripts/check-mac-signing.mjs prints a warning ahead of that).
+  hardenedRuntime: true
+  gatekeeperAssess: false
+win:
+  target:
+    - nsis
+linux:
+  category: AudioVideo;Game
+  synopsis: Party karaoke for UltraStar song libraries
+  maintainer: D3X <https://github.com/D3FXgit>
+  target:
+    - AppImage
+    - deb
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true

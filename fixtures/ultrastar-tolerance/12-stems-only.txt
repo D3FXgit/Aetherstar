@@ -1,0 +1,8 @@
+#ARTIST:Stems Only
+#TITLE:No Full Mix
+#VOCALS:vocals.ogg
+#INSTRUMENTAL:instrumental.ogg
+#BPM:90
+#GAP:0
+: 0 4 60 la
+E

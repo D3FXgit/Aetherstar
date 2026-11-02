@@ -1,0 +1,18 @@
+#ARTIST:Duet Artist
+#TITLE:Two Voices
+#MP3:song.mp3
+#BPM:200
+#GAP:500
+#DUETSINGERP1:Alice
+#DUETSINGERP2:Bob
+P1
+: 0 2 60 Al
+: 2 2 60 ice
+- 4
+P 2
+: 8 2 62 Bo
+: 10 2 62 b
+- 12
+P3
+: 16 2 64 third
+E

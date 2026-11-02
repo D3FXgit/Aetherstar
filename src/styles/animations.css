@@ -1,0 +1,94 @@
+/* Shared keyframes for menus and screens. Each animates only transform and
+   opacity, and each is switched off under Reduce Motion. */
+
+/* The Stage's cover-art fallback (src/stage/media/AmbientFallback.tsx): a slow pan/zoom in place of video. */
+@keyframes ken-burns {
+  from {
+    transform: scale(1.1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.22) translate(-2%, -2%);
+  }
+}
+
+/* Boot's loading sweep line (src/scenes/Boot.tsx). */
+@keyframes aeSweep {
+  0% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+/* Applied as an inline style, hence the attribute match and `!important`. */
+@media (prefers-reduced-motion: reduce) {
+  [style*='aeSweep'] {
+    animation: none !important;
+  }
+}
+
+/* The menu's stage lights (src/design/primitives/StageLights.tsx): a few soft
+   beams swaying slowly from the top edge. Rasterised once; only the transform
+   animates, so it costs the compositor almost nothing. */
+.ae-stage-beam {
+  position: absolute;
+  top: -8%;
+  width: 34vw;
+  height: 120%;
+  margin-left: -17vw;
+  transform-origin: 50% 0;
+  will-change: transform;
+  animation: aeBeamSway var(--ae-beam-duration, 18s) ease-in-out var(--ae-beam-delay, 0s) infinite alternate;
+}
+
+@keyframes aeBeamSway {
+  from {
+    transform: rotate(var(--ae-beam-from, -10deg));
+  }
+  to {
+    transform: rotate(var(--ae-beam-to, 10deg));
+  }
+}
+
+.ae-stage-lights[data-animated='false'] .ae-stage-beam {
+  animation: none;
+  transform: rotate(var(--ae-beam-rest, 0deg));
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ae-stage-beam {
+    animation: none !important;
+    transform: rotate(var(--ae-beam-rest, 0deg));
+  }
+}
+
+/* The results screen's confetti burst (src/session/ResultsConfetti.tsx): one
+   shared keyframe driven by per-piece custom properties, so the pieces cost no
+   JavaScript per frame. It runs once and its host unmounts afterwards. */
+@keyframes aeConfetti {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--ae-confetti-x, 0px), var(--ae-confetti-y, 300px), 0)
+      rotate(var(--ae-confetti-spin, 360deg));
+    opacity: 0;
+  }
+}
+
+/* ResultsConfetti renders nothing under Reduce Motion; this only catches a
+   stray element that still carries the keyframe. */
+@media (prefers-reduced-motion: reduce) {
+  [style*='aeConfetti'] {
+    animation: none;
+  }
+}

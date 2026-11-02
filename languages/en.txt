@@ -1,0 +1,624 @@
+@code: en
+@name: English
+
+# ===========================================================================
+# AetherStar language file -- English (the reference language)
+#
+# Every other language is a copy of this file with the right-hand sides
+# translated. Step-by-step how-to: docs/translating.md. Key naming and rules
+# for developers: docs/i18n-conventions.md.
+#
+# FORMAT
+#   - Plain UTF-8 text, one entry per line:      key = value
+#   - Lines starting with # are comments. Blank lines are ignored.
+#   - Header lines start with @ and describe the file itself:
+#       @code: de          language code (the FILE NAME wins: de.txt is "de")
+#       @name: Deutsch     how the language is listed in Settings, in itself
+#       @fallback: de      optional: where missing texts come from before
+#                          English (useful for de-AT, pt-BR, ...)
+#   - Only translate the part right of the first "=". Never change the key.
+#   - Spaces around key and value are ignored. A "#" or "=" inside a value
+#     is just text.
+#   - \n inside a value is a line break, \t a tab, \\ a backslash.
+#   - {name} is a placeholder the game fills in (a number, a name ...).
+#     Keep it exactly as written; move it wherever your grammar wants it.
+#   - Plurals: the same key with one suffix per plural form, e.g.
+#       settings.mics.players.count.one   = {count} player in your roster.
+#       settings.mics.players.count.other = {count} players in your roster.
+#     The forms are the Unicode CLDR plural categories: zero, one, two, few,
+#     many, other. Write the ones your language uses; "other" is always
+#     needed. A ".zero" entry, if you add one, is used for exactly 0.
+#   - Anything you leave out (or leave empty) is shown in English.
+# ===========================================================================
+
+# --- Shared bits ------------------------------------------------------------
+common.selected = Selected
+common.select = Select
+common.percent = {value}%
+
+# --- Settings: the screen and its tabs --------------------------------------
+settings.title = Settings
+settings.nav.label = Settings sections
+settings.tabs.audio = Audio & Mics
+settings.tabs.songs = Song Folders
+settings.tabs.graphics = Graphics
+
+# --- Settings > Audio & Mics > Volume ----------------------------------------
+settings.volume.title = Volume
+# {channel} is one of the mixer labels below, e.g. "Music volume".
+settings.volume.sliderLabel = {channel} volume
+settings.volume.master.label = Master
+settings.volume.master.description = Everything the game plays.
+settings.volume.music.label = Music
+settings.volume.music.description = The song you sing, and song previews.
+settings.volume.guideVocals.label = Guide vocals
+settings.volume.guideVocals.description = The original singer, on songs that come with a separate vocal track.
+settings.volume.effects.label = Effects
+settings.volume.effects.description = Clicks, cheers and score sounds.
+settings.volume.menuMusic.label = Menu music
+settings.volume.menuMusic.description = The music behind the menus.
+settings.volume.menuMusicSource.label = Menu music source
+settings.volume.menuMusicSource.description = Random songs from your library, the built-in track, or silence.
+settings.volume.menuMusicSource.library = Songs from your library
+settings.volume.menuMusicSource.builtin = Built-in track
+settings.volume.menuMusicSource.off = Off
+
+# --- Settings > Audio & Mics > Microphones -----------------------------------
+settings.mics.title = Microphones
+settings.mics.hint = Each singer picks a mic when you start a song.
+settings.mics.check.label = Mic check
+settings.mics.check.none = No microphones detected.
+settings.mics.check.count.one = {count} audio input detected.
+settings.mics.check.count.other = {count} audio inputs detected.
+settings.mics.check.action = Open mic check
+settings.mics.timing.label = Timing
+settings.mics.timing.description = Sync your speakers and mics.
+settings.mics.timing.action = Open Calibration
+settings.mics.players.label = Players
+settings.mics.players.none = No players yet.
+settings.mics.players.count.one = {count} player in your roster.
+settings.mics.players.count.other = {count} players in your roster.
+settings.mics.players.action = Manage players
+
+# --- Settings > Audio & Mics > Karaoke effect --------------------------------
+settings.monitor.title = Karaoke effect
+settings.monitor.hear.label = Hear the microphones
+settings.monitor.hear.description = Play the singers' voices through the speakers, quieter than the song.
+settings.monitor.level.label = Microphone level
+settings.monitor.level.description = If you hear whistling, turn this down or move the mic away from the speakers.
+settings.monitor.level.disabled = Turn on "Hear the microphones" to set how loud they are.
+
+# --- Settings > Song Folders -------------------------------------------------
+settings.library.title = Song folders
+settings.library.rescan = Rescan
+settings.library.remove = Remove
+settings.library.add.label = Add a folder
+settings.library.add.empty = No song folders added yet.
+settings.library.add.more = Scan another folder of UltraStar songs.
+
+# --- Settings > Graphics -----------------------------------------------------
+settings.window.title = Window
+settings.window.windowed.label = Windowed mode
+settings.window.windowed.descriptionMac = Run in a window, or use the green button or Control-Command-F.
+settings.window.windowed.description = Run in a window instead of full screen.
+
+settings.display.title = Displays
+settings.display.second.label = Second screen
+settings.display.second.description = Show the audience scoreboard on another monitor.
+settings.display.second.toggle = Enable second screen
+settings.display.empty = No displays found.
+settings.display.primary = Main display
+
+settings.fx.reduce.label = Reduce effects
+settings.fx.reduce.description = Fewer particles and simpler visuals, for slower computers.
+
+# --- Settings > Graphics > Language ------------------------------------------
+settings.language.title = Language
+settings.language.auto.label = Automatic
+# {language} is the name of the language the system asked for, e.g. "English".
+settings.language.auto.description = Follow your system language ({language}).
+settings.language.source.bundled = Built in
+settings.language.source.user = From your languages folder
+settings.language.missing.one = {count} text not translated yet
+settings.language.missing.other = {count} texts not translated yet
+settings.language.use = Use
+# Read out by screen readers for the "Use" button, e.g. "Use Deutsch".
+settings.language.useLabel = Use {language}
+settings.language.folder.label = Add your own language
+settings.language.folder.description = Drop a translated .txt file into the languages folder and it shows up here.
+settings.language.folder.action = Open languages folder
+
+# --- Home (title screen) ------------------------------------------------------
+home.tagline = Sing together
+home.start = Start a night
+home.jukebox = Jukebox
+home.settings = Settings
+home.exit = Exit
+home.mics.none = No mic found
+home.mics.ready.one = {count} mic ready
+home.mics.ready.other = {count} mics ready
+home.mics.looking = Looking for mics…
+# The library song playing behind the menus, e.g. "Now playing: Africa – Toto".
+home.nowPlaying = Now playing: {title} – {artist}
+
+# --- Shared controls (dialogs, error panels) ----------------------------------
+ui.dialog.cancel = Cancel
+ui.error.title = Something went wrong
+ui.error.message = Head back to the menu and try again.
+ui.error.retry = Back to menu
+ui.error.showDetails = Show details
+# {prefix} is the tag the error was logged under, e.g. "[AetherStar crash]".
+ui.error.logged = The full error was logged to the console under {prefix}.
+scene.back = Back
+
+# results
+# --- Results ------------------------------------------------------------------
+results.title = Results
+results.empty = No results yet.
+results.skip = Skip
+results.winner = Winner!
+results.versus.winner = Versus winner!
+results.versus.tieLabel = Tied!
+# {name} is the winner's player name.
+results.versus.wins = {name} wins!
+# {name} is the runner-up, {points} the winning margin.
+results.versus.margin = Beats {name} by {points} points
+results.versus.tie = It's a tie!
+results.versus.tieScore = Both on {score} points
+results.highscore = New highscore!
+# {number} is the microphone's number, 1 to 8.
+results.mic = Mic {number}
+# Notes sung, by how well they were hit.
+results.notes.epic = Epic {count}
+results.notes.good = Good {count}
+results.notes.missed = Missed {count}
+# How many lines earned each verdict, on the results screen.
+results.lines.perfect = Perfect ×{count}
+results.lines.great = Great ×{count}
+results.lines.good = Good ×{count}
+results.lines.ok = OK ×{count}
+results.alsoSinging = Also singing
+results.actions.rematch = Rematch
+results.actions.newSong = Choose new song
+results.actions.leave = Leave
+results.actions.leaderboard = Leaderboard
+results.singers.one = {count} singer
+results.singers.other = {count} singers
+# Read out by screen readers in place of the animation.
+results.announce.winner = {name} wins with {score} points on microphone {mic}.
+results.announce.rating = {rank}, {count} out of 5 stars.
+results.announce.others = Also singing: {list}.
+results.announce.other = {name}, {score} points, {rank}
+results.announce.otherWithHighscore = {name}, {score} points, {rank}, new highscore
+# Rank titles, worst to best. Classic party karaoke games keep these in English everywhere.
+results.rank.toneDeaf = Tone Deaf
+results.rank.amateur = Amateur
+results.rank.wannabe = Wannabe
+results.rank.hopeful = Hopeful
+results.rank.risingStar = Rising Star
+results.rank.leadSinger = Lead Singer
+results.rank.hitMachine = Hit Machine
+results.rank.superstar = Superstar
+
+# party
+# --- Party mode (Mystery Roulette) ----------------------------------------------
+party.title = Mystery roulette
+party.loading = Spinning up the roulette…
+party.noMics.title = No microphones are set up yet.
+party.noMics.description = Party mode needs at least one microphone. Set one up, then spin again.
+party.noMics.action = Set up mics
+party.noPlayers.title = No players on the roster yet.
+party.noPlayers.description = Add at least one player so there is someone to draw.
+party.noPlayers.action = Add players
+party.mode.label = Game mode
+party.singers.title = Singers tonight
+party.singers.hint = Drawn fairly, least-sung first
+party.count.label = Singers
+party.count.option.one = {count} singer
+party.count.option.other = {count} singers
+# {number} is the microphone's number, 1 to 8.
+party.mic = Mic {number}
+party.unknownPlayer = Someone
+party.slot.firstSong = First song tonight
+party.slot.sung.one = Sung once tonight
+party.slot.sung.other = Sung {count} times tonight
+party.slot.pass = Pass the mic
+party.slot.passHint = Hand this mic to someone on the bench
+party.slot.passDisabled = Nobody left on the bench
+party.songs.title.one = Your mystery song
+party.songs.title.other = Pick one of {count} mystery songs
+party.songs.hint = Passing a mic deals new songs too
+party.songs.selected = Selected
+# {score} is the song's best score so far, {name} the singer who holds it.
+party.songs.best = Best: {score} by {name}
+party.songs.noBest = No score yet
+party.songs.duet = Duet
+party.songs.video = Video
+# {title} is the song's title.
+party.footer.upNext = Up next: {title}
+party.footer.pick = Pick a song
+party.start = Start singing
+
+# --- Players (roster) ----------------------------------------------------------
+players.title = Players
+players.subtitle = Drag the cards to put tonight's singers in order.
+players.add = Add player
+players.card.edit = Edit
+players.card.delete = Delete
+# Read out by screen readers for the card buttons. {name} is the player's name.
+players.card.editLabel = Edit {name}
+players.card.deleteLabel = Delete {name}
+players.form.name = Name
+# Read out by screen readers for each colour swatch. {number} counts from 1.
+players.form.color = Color {number}
+players.form.choosePhoto = Choose photo
+players.form.dropHint = Or drop a photo here.
+players.form.cancel = Cancel
+players.form.save = Save
+players.crop.cancel = Cancel
+players.crop.use = Use photo
+
+# --- Singing > Pause menu -----------------------------------------------------
+# pause
+sing.pause.title = Paused
+# {title} and {artist} come from the song file.
+sing.pause.song = {title} · {artist}
+sing.pause.resume = Resume
+sing.pause.restart = Restart song
+sing.pause.quit = Quit to song select
+sing.pause.quitParty = End the party
+sing.pause.getReady = Get ready
+
+# --- Singing > The song screen ------------------------------------------------
+# gameplay
+sing.loading.title = Loading song
+sing.loadError.title = Couldn't load this song
+# {error} is the technical reason the file could not be read.
+sing.loadError.message = This song's chart file couldn't be read: {error}
+sing.loadError.action = Back to the library
+sing.mediaError.title = Couldn't load this song's media
+sing.mediaError.message = The audio or video file for this song is missing or unreadable.
+sing.mediaError.action = Leave song
+sing.noSong = No song selected.
+# {artist} comes from the song file, {bpm} is a number, {time} is e.g. "1:12 / 4:22".
+sing.songCard.meta = {artist} · {bpm} BPM · {time}
+sing.micsLive.one = {count} mic live
+sing.micsLive.other = {count} mics live
+sing.micHealth.noDevice = No microphone found. Nothing is being scored.
+sing.micHealth.noCapture = Microphone not running. Nothing is being scored.
+sing.micHealth.noFrames = Microphone stopped sending audio. Nothing is being scored.
+# Shown on a note as it is judged.
+sing.hit.excellent = Excellent
+sing.hit.good = Good
+sing.hit.bad = Bad
+sing.hit.golden = Golden!
+# Shown when a line ends, by how much of it was sung well.
+sing.lineRating.perfect = Perfect!
+sing.lineRating.great = Great!
+sing.lineRating.good = Good
+sing.lineRating.ok = OK
+
+# --- Microphones (the numbered mic slots, on every screen) --------------------
+# {number} is the mic slot, 1 to 8.
+mic.slot = Mic {number}
+mic.channel.mono = Mono
+mic.channel.left = Left
+mic.channel.right = Right
+# {number} is the input number printed on an audio interface.
+mic.channel.input = In {number}
+mic.matrix.header.mic = Mic
+mic.matrix.header.device = Device
+mic.matrix.header.channel = Channel
+mic.matrix.header.level = Level
+mic.matrix.header.actions = Actions
+mic.matrix.noInput = No input
+mic.matrix.noDevices = No audio inputs found yet; plug one in and it shows up here.
+# {mics} is a list of mic names, e.g. "Mic 2, Mic 5".
+mic.matrix.conflict = Shares this input with {mics}
+# {mic} is a mic name, e.g. "Mic 3". Read out by screen readers.
+mic.matrix.device.label = {mic} device
+mic.matrix.channel.label = {mic} channel
+mic.matrix.calibrate.label = Calibrate {mic}
+mic.matrix.level.label = {mic} input level
+mic.matrix.calibrate.action = Calibrate
+mic.identify.action = Tap to identify
+mic.identify.listening = Listening…
+mic.identify.cancel = Cancel
+mic.setup.title = Mic setup
+mic.setup.description = Sing into a mic to see which row lights up.
+mic.setup.hint = Mics 1–8 are inputs, not players; singers grab one per song.
+
+# --- Audience window > The song -----------------------------------------------
+audience.sing.getReady = Get ready
+audience.sing.paused = Paused
+
+# songSelect
+# --- Song selector ------------------------------------------------------------
+songSelect.title = Select a song
+# {count} is the number of songs on screen.
+songSelect.count.one = {count} song
+songSelect.count.other = {count} songs
+songSelect.mode.classic = Solo/Duet
+songSelect.mode.battle = Versus
+songSelect.mode.party = Party
+songSelect.mode.jukebox = Jukebox
+# {letter} is the jump-to letter, e.g. "B".
+songSelect.letter.clear = Clear the {letter} filter
+songSelect.search.label = Search songs
+songSelect.search.placeholder.one = Search {count} song by title, artist or edition
+songSelect.search.placeholder.other = Search {count} songs by title, artist or edition
+songSelect.tile.duet = Duet
+songSelect.meta.duet = Duet
+songSelect.meta.video = Video
+songSelect.preview.noCover = No cover art
+songSelect.start.sing = Start singing
+songSelect.start.unplayable = Unplayable: missing audio
+songSelect.favorite.label = Favourite
+songSelect.highscore.title = Highscore
+songSelect.highscore.none = No highscore yet
+songSelect.highscore.unknownSinger = Unknown singer
+songSelect.difficulty.easy = Easy
+songSelect.difficulty.normal = Normal
+songSelect.difficulty.hard = Hard
+songSelect.jumpTo = Jump to
+songSelect.empty.title = No song library yet
+songSelect.empty.description = Add a folder of UltraStar songs to start browsing your library and singing.
+songSelect.empty.noMatches = No songs match yet.
+library.addFolder = Add library folder
+
+# --- Song selector > Filter bar -------------------------------------------------
+songSelect.filter.favorites = Favourites
+songSelect.filter.duets = Duets
+# {order} is one of the sort names below.
+songSelect.sort.label = Sort: {order}
+songSelect.sort.artist = Artist
+songSelect.sort.title = Title
+songSelect.sort.recent = Recently added
+songSelect.sort.recentlySung = Recently sung
+songSelect.sort.mostSung = Most sung
+# {language} is a song language from the library, or the word for "All" below.
+songSelect.filter.language = Language: {language}
+songSelect.filter.languageAll = All
+songSelect.filter.random = Random
+songSelect.filter.refresh = Refresh library
+songSelect.hint.favorite = Favourite
+songSelect.hint.addToQueue = Add to queue
+songSelect.status.indexed.one = {count} song indexed
+songSelect.status.indexed.other = {count} songs indexed
+songSelect.status.refreshing = Refreshing library
+songSelect.status.progressLabel = Library scan progress
+
+# --- Song selector > Songs that failed to load --------------------------------
+songSelect.scanErrors.button.one = {count} song couldn't be loaded
+songSelect.scanErrors.button.other = {count} songs couldn't be loaded
+songSelect.scanErrors.title = Songs that couldn't be loaded
+songSelect.scanErrors.description = Fix these files, then refresh the library.
+songSelect.scanErrors.close = Close
+
+# --- Song selector > Jukebox ----------------------------------------------------
+songSelect.jukebox.title = Pick the music
+songSelect.jukebox.playNow = Play now
+songSelect.jukebox.addToQueue = Add to queue
+songSelect.queue.title = Up next
+songSelect.queue.count.one = {count} song
+songSelect.queue.count.other = {count} songs
+songSelect.queue.empty = Add songs to the queue, or shuffle the whole list.
+# {title} is a song title.
+songSelect.queue.remove = Remove {title} from the queue
+songSelect.queue.shuffleAll = Shuffle all
+songSelect.queue.play = Play queue
+
+# jukebox
+# --- Jukebox (playing) ----------------------------------------------------------
+jukebox.upNext = Up next
+jukebox.menu.title = Jukebox
+jukebox.menu.resume = Keep listening
+jukebox.menu.skip = Skip song
+jukebox.menu.backToList = Back to the list
+jukebox.error.title = Couldn't load this song
+# {error} is the technical reason, in English.
+jukebox.error.message = This song's chart file couldn't be read: {error}
+jukebox.empty.title = Nothing is playing
+jukebox.empty.message = Pick a song from the list to start the jukebox.
+# --- Jukebox > Playback controls (the bar over the video) -----------------------
+jukebox.nowPlaying = Now playing
+jukebox.transport.label = Playback controls
+jukebox.transport.play = Play
+jukebox.transport.pause = Pause
+jukebox.transport.previous = Previous
+jukebox.transport.next = Next
+jukebox.transport.shuffle = Shuffle
+jukebox.transport.repeat.off = Repeat: off
+jukebox.transport.repeat.all = Repeat: all
+jukebox.transport.repeat.one = Repeat: this song
+jukebox.transport.queue = Up next
+jukebox.transport.seek = Song position
+# {elapsed} and {total} are times, e.g. "1:12" and "4:22". Read out by screen readers.
+jukebox.transport.position = {elapsed} of {total}
+# {time} is the time left in the song, e.g. "3:10".
+jukebox.transport.remaining = −{time}
+jukebox.transport.volume = Music volume
+jukebox.transport.mute = Mute
+jukebox.transport.unmute = Unmute
+# {title} and {artist} are the next song in the queue.
+jukebox.transport.upNext = Up next: {title} · {artist}
+# --- Jukebox > Up next (the queue panel) ------------------------------------------
+jukebox.queue.count.one = {count} song queued
+jukebox.queue.count.other = {count} songs queued
+jukebox.queue.empty = The queue is empty.
+jukebox.queue.emptyHintAutoplay = Random songs keep playing when it runs out.
+jukebox.queue.emptyHintRepeat = The songs you've heard play again when it runs out.
+# {title} is a song title. Read out by screen readers.
+jukebox.queue.moveUp = Move {title} up
+jukebox.queue.moveDown = Move {title} down
+jukebox.queue.remove = Remove {title} from the queue
+jukebox.queue.clear = Clear queue
+jukebox.queue.add = Add songs
+jukebox.queue.close = Close
+jukebox.queue.autoplay = Autoplay random songs
+jukebox.queue.autoplayHint = Keeps the music going when the queue runs out.
+# --- Jukebox > Add songs (the song browser over the video) ------------------------
+jukebox.add.title = Add songs
+jukebox.add.hint = Pick songs for the queue. The music keeps playing.
+# {title} is the song just added.
+jukebox.add.added = Added {title} to the queue
+jukebox.add.done = Done
+jukebox.add.empty = No songs match your search.
+# --- Jukebox > The queue ran out ----------------------------------------------------
+jukebox.finished.title = Queue finished
+jukebox.finished.message = That was the last song. Add more, or head back to the list.
+jukebox.finished.add = Add songs
+
+# assign
+# --- Who's singing (player selection) ----------------------------------------------
+assign.title = Who's singing?
+assign.mics.none = No microphones are set up yet.
+# {number} is a microphone's number, 1 to 8.
+assign.mics.single = Mic {number} goes to the first singer you pick.
+assign.mics.range = Picked singers take mics {first} to {last}, in the order you pick them.
+# {list} is a list of mic numbers, e.g. "1, 4".
+assign.mics.list = Picked singers take mics {list}, in the order you pick them.
+assign.empty.title = No players yet
+assign.empty.description = Scores are saved per player, so add at least one before singing.
+assign.empty.action = Add a player
+assign.addPlayer = Add player
+assign.start = Start singing
+assign.full.one = All {count} mic is taken. Set up more in Settings › Audio & Mics.
+assign.full.other = All {count} mics are taken. Set up more in Settings › Audio & Mics.
+assign.mic = Mic {number}
+# Read out by screen readers for a picked singer, e.g. "Alex, Mic 2".
+assign.badge.label = {name}, Mic {number}
+assign.difficulty.label = Difficulty for {name}
+assign.difficulty.easy = Easy
+assign.difficulty.normal = Normal
+assign.difficulty.hard = Hard
+# Read out for a singer's difficulty chip, e.g. "Difficulty for Alex: Normal". {level} is Easy, Normal or Hard.
+assign.difficulty.chip = Difficulty for {name}: {level}
+assign.difficulty.hint = Press to change, or use left and right
+assign.difficulty.easier = Easier
+assign.difficulty.harder = Harder
+
+# --- Audience screen (TV): line-up, scores, results ---------------------------
+audience.lineup.choosingSong = Choosing a song…
+audience.lineup.waiting = Who's singing?
+audience.scoreboard.leader = Leader
+audience.scoreboard.score = Score
+# {name} is the singer who just moved into first place.
+audience.live.newLeader = {name} takes the lead
+# Places on the live score cards.
+audience.live.place.first = 1st
+audience.live.place.second = 2nd
+audience.live.place.third = 3rd
+# {rank} is the place from 4 upwards.
+audience.live.place.other = #{rank}
+audience.results.empty = No results yet.
+audience.results.winner = Winner
+
+# leaderboard
+# --- Leaderboard ---------------------------------------------------------------
+leaderboard.title = Leaderboard
+leaderboard.subtitle = The best scores on record
+leaderboard.singAnother = Sing another song
+leaderboard.empty.title = No songs played yet.
+leaderboard.empty.description = Finish a song and your score lands here.
+leaderboard.empty.action = Pick a song
+# Under each score: how many notes were hit epic and good.
+leaderboard.notes = {epic} epic · {good} good
+leaderboard.count.one = {count} score on record
+leaderboard.count.other = {count} scores on record
+
+# starting
+# --- Song starting (countdown) ---------------------------------------------------
+# Read out by screen readers while the song is about to start.
+starting.label = Starting {title}
+starting.labelWithArtist = Starting {title} by {artist}
+starting.untitled = Starting the song
+starting.countdown = Starting in {count}
+starting.cancelHint = Back to change the song
+
+# duel
+# --- Versus: the tug-of-war bar over the song ----------------------------------------
+# Shown when a singer has no profile name; {number} is 1 or 2.
+duel.player = Player {number}
+duel.leadChange = Lead change!
+duel.tied = Tied
+# {name} is the leading singer, {points} their lead.
+duel.lead = {name} +{points} pts
+
+# songLoading
+# --- Song loading screen ------------------------------------------------------------
+songLoading.title = Loading song
+# Read out by screen readers; {title} is the song's title.
+songLoading.label = {title} is loading
+songLoading.cover = Cover artwork
+songLoading.status = Loading…
+
+# --- Calibration --------------------------------------------------------------
+calibration.title = Calibration
+calibration.description = Sync your speakers and mics so every note lands on time.
+calibration.setup.description = Start a mic below to get going.
+calibration.setup.noMics = No mics found.
+calibration.setup.noPlayers = Add a player first.
+calibration.output.title = Speaker delay
+calibration.output.description = Tap the spacebar on each click.
+calibration.input.title = Mic delay
+calibration.input.description = Say "tap" into your mic on each click.
+calibration.start = Start
+# {done} is how many taps were heard so far, {total} how many are needed.
+calibration.progress = {done} of {total}
+calibration.difficulty.title = Difficulty
+calibration.difficulty.easy = Easy
+calibration.difficulty.normal = Normal
+calibration.difficulty.hard = Hard
+calibration.next = Next
+calibration.range.title = Vocal range
+calibration.range.description = Sing a comfortable low note, then a comfortable high one.
+calibration.range.captureLow = Capture low note
+calibration.range.captureHigh = Capture high note
+# {count} is a number of semitones and can be negative.
+calibration.range.suggestion.one = Suggested shift: {count} semitone
+calibration.range.suggestion.other = Suggested shift: {count} semitones
+calibration.range.shift.label = Shift (semitones)
+calibration.apply = Apply
+calibration.done = Calibration saved.
+calibration.rerun = Run again
+calibration.reset = Reset
+
+# --- Mic check ----------------------------------------------------------------
+micCheck.title = Mic check
+micCheck.description = Sing a steady note and watch each mic pick it up.
+micCheck.tuner.delay.label = Mic delay
+
+# --- Mic list and mic access (mic check, calibration) -------------------------
+audio.devices.empty.title = No mics found
+audio.devices.empty.message = Plug one in and rescan, or check your system's sound settings.
+audio.devices.rescan = Rescan
+audio.devices.start = Start
+audio.devices.stop = Stop
+audio.permission.title = Mic access needed
+audio.permission.message = Allow mic access in your system settings, then try again.
+audio.permission.retry = Try again
+
+# --- A mic was unplugged ------------------------------------------------------
+# {mic} is a mic name, e.g. "Mic 3".
+micRecovery.title.single = {mic} was unplugged
+micRecovery.title.several.one = {count} mic was unplugged
+micRecovery.title.several.other = {count} mics were unplugged
+micRecovery.guidance.single = Plug it back into the same port to bring {mic} back.
+micRecovery.guidance.several = Plug them back into the same ports to bring them back.
+micRecovery.dismiss.single = Continue without {mic}
+micRecovery.dismiss.several = Continue without them
+micRecovery.openSetup = Open mic setup
+
+# system
+# --- Shown by the app itself, outside the game screens (system dialogs) --------
+main.startupFailed.title = AetherStar: some features failed to start
+# {error} is the technical error message.
+main.startupFailed.body = The library and player database could not be opened, so those features won't work this session.\n\n{error}
+# A screen in Settings > Graphics > second screen; {id} is the system's number for it.
+main.display.label = Display {id}
+
+# --- Who's singing > Versus (a duel: exactly two singers) ----------------------
+assign.versus.pickTwo = Versus is 1 against 1: pick two singers.
+assign.versus.full = Versus is 1 against 1. Deselect a singer to swap someone in.
+assign.versus.needsTwoMics = Versus needs two mics. Set up another in Settings › Audio & Mics.

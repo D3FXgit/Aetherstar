@@ -1,0 +1,9 @@
+#ARTIST:Rapper
+#TITLE:Rap Notes
+#MP3:song.mp3
+#BPM:150
+#GAP:0
+R 0 4 60 spit
+G 4 4 60 fire
+: 8 4 60 sung
+E

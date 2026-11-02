@@ -1,0 +1,1081 @@
+/* In-song feedback: hit bursts (src/game/effects/LaneHitFx.tsx), note clears
+   (src/game/lane/NoteBlock.tsx, NoteLane.tsx), the pitch line, heat and
+   sustain sparks.
+
+   Everything here animates only transform and opacity from shared keyframes,
+   so the main thread (audio clock, pitch detectors) pays nothing per frame.
+   Each burst keyframe exists twice (...A / ...B): alternating them via
+   data-phase restarts a recycled slot without forcing a layout. */
+
+.ae-hit-layer {
+  /* The burst can never dirty anything outside the lane it belongs to. */
+  contain: layout style;
+}
+
+.ae-hit-slot {
+  display: none;
+  /* Sits exactly on the judged note; children are placed around that point.
+     Positioned here rather than by a utility class so the slot cannot be
+     detached from its note by an unrelated change to the markup. */
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.ae-hit-slot[data-firing='true'] {
+  display: block;
+}
+
+/* The impact bloom: the white-hot flash the burst opens on, a full frame before
+   the sparks are clear of it.
+
+   It is the slot's own `::before`, so the pool does not grow by a single node
+   to gain what is now the loudest thing in a hit. Its size arrives as
+   `--ae-hit-bloom`, written per hit from the lane's height and the outcome
+   (see burstBloomPx) -- a miss sets it to 0, and an element of zero size paints
+   nothing at all, which is how the miss keeps its restraint without a second
+   selector. */
+.ae-hit-slot::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--ae-hit-bloom, 0px);
+  height: var(--ae-hit-bloom, 0px);
+  margin: calc(var(--ae-hit-bloom, 0px) / -2);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #fff 0%,
+    var(--ae-hit-color, #fff) 26%,
+    color-mix(in srgb, var(--ae-hit-color, #fff) 45%, transparent) 48%,
+    transparent 72%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* A golden note gets a spoked starburst on the slot's `::after` -- again, no
+   node. Reserved for golden precisely because it is the most expensive thing
+   here to paint (a conic gradient) and the rarest thing to happen: a chart has
+   a handful of golden notes, so this fires seconds apart at worst, never eight
+   times a second across a stack. */
+.ae-hit-slot::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ae-hit-slot[data-golden='true']::after {
+  width: calc(var(--ae-hit-bloom, 0px) * 1.7);
+  height: calc(var(--ae-hit-bloom, 0px) * 1.7);
+  margin: calc(var(--ae-hit-bloom, 0px) * -0.85);
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 8deg,
+    var(--ae-hit-color, #fff) 10deg 12deg,
+    transparent 14deg 53deg,
+    var(--ae-hit-color, #fff) 55deg 57deg,
+    transparent 59deg 98deg,
+    var(--ae-hit-color, #fff) 100deg 102deg,
+    transparent 104deg 143deg,
+    var(--ae-hit-color, #fff) 145deg 147deg,
+    transparent 149deg 188deg,
+    var(--ae-hit-color, #fff) 190deg 192deg,
+    transparent 194deg 233deg,
+    var(--ae-hit-color, #fff) 235deg 237deg,
+    transparent 239deg 278deg,
+    var(--ae-hit-color, #fff) 280deg 282deg,
+    transparent 284deg 323deg,
+    var(--ae-hit-color, #fff) 325deg 327deg,
+    transparent 329deg 360deg
+  );
+  /* Fades the spokes out at the rim rather than cutting them off square. */
+  mask-image: radial-gradient(circle, #000 12%, rgba(0, 0, 0, 0.55) 45%, transparent 78%);
+}
+
+.ae-hit-ring,
+.ae-hit-particle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.ae-hit-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px;
+  border-radius: 50%;
+  border: 2px solid var(--ae-hit-color, #fff);
+  /* Same double-stroke as the lane frame: the shockwave has to be visible
+     against a white video frame as well as a dark one. */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+/* A second, faster wave inside the first. Every hit gets it -- one shockwave
+   reads as a decal, two reading at different speeds read as an impact -- and it
+   is a pseudo-element of a node that already exists, so it is free. */
+.ae-hit-ring::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  opacity: 0;
+}
+
+.ae-hit-particle {
+  /* A capsule, not a dot: the element is `sizePx * stretch` long and `sizePx`
+     tall (written at mount by LaneHitFx) and the keyframe rotates it onto its
+     own direction of travel, so it lies along its path the way a thrown spark
+     does. Fully rounded ends keep the short ones reading as embers.
+
+     A white-hot core in the singer's mic colour; the coloured body and dark
+     hairline keep it visible over a pale video frame. */
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--ae-hit-spark, #fff) 0%, #fff 55%, #fff 100%);
+  box-shadow:
+    0 0 9px var(--ae-hit-spark, #fff),
+    0 0 0 1px rgba(0, 0, 0, 0.45);
+}
+
+/* The streak. A tapering tail behind each spark, drawn on the particle's own
+   `::after` so twelve sparks still cost twelve nodes -- and inheriting the
+   parent's rotation, so it always trails the direction of flight exactly. */
+.ae-hit-particle::after {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 20px;
+  height: 1.5px;
+  margin-top: -0.75px;
+  border-radius: 999px;
+  background: linear-gradient(270deg, var(--ae-hit-spark, #fff) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 0.9;
+}
+
+/* A zero-size flex box centres its overflowing child on the slot's point,
+   which leaves the child's own `transform` free for the animation. */
+.ae-hit-anchor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: 0;
+  height: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.ae-hit-word-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.ae-hit-word {
+  font-size: var(--ae-hit-font, 20px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #fff;
+  /* Legibility over an arbitrary video frame with no panel behind it: a tight
+     dark halo carries the contrast, and the tier's colour is spent on the glow
+     rather than on the glyphs. */
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 0 6px rgba(0, 0, 0, 0.8),
+    0 0 22px var(--ae-hit-color, #fff);
+}
+
+.ae-hit-combo {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: calc(var(--ae-hit-font, 20px) * 0.52);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.ae-hit-slot[data-phase='a'] .ae-hit-word-group {
+  animation: aeHitWordA var(--ae-hit-duration, 500ms) cubic-bezier(0.34, 1.28, 0.64, 1) both;
+}
+.ae-hit-slot[data-phase='b'] .ae-hit-word-group {
+  animation: aeHitWordB var(--ae-hit-duration, 500ms) cubic-bezier(0.34, 1.28, 0.64, 1) both;
+}
+.ae-hit-slot[data-phase='a'] .ae-hit-particle {
+  animation: aeHitParticleA var(--ae-hit-duration, 500ms) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-phase='b'] .ae-hit-particle {
+  animation: aeHitParticleB var(--ae-hit-duration, 500ms) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-phase='a'] .ae-hit-ring {
+  animation: aeHitRingA calc(var(--ae-hit-duration, 500ms) * 0.55) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-phase='b'] .ae-hit-ring {
+  animation: aeHitRingB calc(var(--ae-hit-duration, 500ms) * 0.55) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* The inner wave runs shorter and starts ahead of the outer one, which is what
+   separates them into two events rather than one thick ring. */
+.ae-hit-slot[data-phase='a'] .ae-hit-ring::before {
+  animation: aeHitRingInnerA calc(var(--ae-hit-duration, 500ms) * 0.36) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-phase='b'] .ae-hit-ring::before {
+  animation: aeHitRingInnerB calc(var(--ae-hit-duration, 500ms) * 0.36) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-phase='a']::before {
+  animation: aeHitBloomA calc(var(--ae-hit-duration, 500ms) * 0.55) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-phase='b']::before {
+  animation: aeHitBloomB calc(var(--ae-hit-duration, 500ms) * 0.55) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-golden='true'][data-phase='a']::after {
+  animation: aeHitSunA var(--ae-hit-duration, 500ms) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ae-hit-slot[data-golden='true'][data-phase='b']::after {
+  animation: aeHitSunB var(--ae-hit-duration, 500ms) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes aeHitWordA {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(calc(0.62 * var(--ae-hit-word-emphasis, 1)));
+  }
+  22% {
+    opacity: 1;
+    transform: translate3d(0, calc(var(--ae-hit-rise, -24px) * 0.42), 0)
+      scale(calc(1.16 * var(--ae-hit-word-emphasis, 1)));
+  }
+  38% {
+    transform: translate3d(0, calc(var(--ae-hit-rise, -24px) * 0.58), 0)
+      scale(calc(1.02 * var(--ae-hit-word-emphasis, 1)));
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, var(--ae-hit-rise, -24px), 0) scale(calc(0.98 * var(--ae-hit-word-emphasis, 1)));
+  }
+}
+@keyframes aeHitWordB {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(calc(0.62 * var(--ae-hit-word-emphasis, 1)));
+  }
+  22% {
+    opacity: 1;
+    transform: translate3d(0, calc(var(--ae-hit-rise, -24px) * 0.42), 0)
+      scale(calc(1.16 * var(--ae-hit-word-emphasis, 1)));
+  }
+  38% {
+    transform: translate3d(0, calc(var(--ae-hit-rise, -24px) * 0.58), 0)
+      scale(calc(1.02 * var(--ae-hit-word-emphasis, 1)));
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, var(--ae-hit-rise, -24px), 0) scale(calc(0.98 * var(--ae-hit-word-emphasis, 1)));
+  }
+}
+
+/* The spark's flight, in four beats rather than three.
+
+   It leaves fast and hot, peaks *bigger* than its resting size while it is
+   brightest (which is what has to survive a pale backdrop), then decelerates
+   into an arc: the last third adds `--ae-hit-gravity` to its vertical travel
+   and finishes the tumble, so the debris settles instead of sliding to a stop
+   in a straight line. The `rotate` is what aims the capsule and its streak
+   along the path -- one transform, three terms, still compositor-only. */
+@keyframes aeHitParticleA {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(var(--ae-hit-angle, 0deg)) scale(0.3);
+  }
+  14% {
+    opacity: 1;
+    transform: translate3d(
+        calc(var(--ae-hit-dx, 0px) * 0.34 * var(--ae-hit-emphasis, 1)),
+        calc(var(--ae-hit-dy, 0px) * 0.34),
+        0
+      )
+      rotate(calc(var(--ae-hit-angle, 0deg) + var(--ae-hit-spin, 0deg) * 0.2))
+      scale(1.3);
+  }
+  58% {
+    opacity: 0.92;
+    transform: translate3d(
+        calc(var(--ae-hit-dx, 0px) * 0.82 * var(--ae-hit-emphasis, 1)),
+        calc(var(--ae-hit-dy, 0px) * 0.82 + var(--ae-hit-gravity, 0px) * 0.3),
+        0
+      )
+      rotate(calc(var(--ae-hit-angle, 0deg) + var(--ae-hit-spin, 0deg) * 0.65))
+      scale(0.86);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(
+        calc(var(--ae-hit-dx, 0px) * var(--ae-hit-emphasis, 1)),
+        calc(var(--ae-hit-dy, 0px) + var(--ae-hit-gravity, 0px)),
+        0
+      )
+      rotate(calc(var(--ae-hit-angle, 0deg) + var(--ae-hit-spin, 0deg)))
+      scale(0.34);
+  }
+}
+@keyframes aeHitParticleB {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(var(--ae-hit-angle, 0deg)) scale(0.3);
+  }
+  14% {
+    opacity: 1;
+    transform: translate3d(
+        calc(var(--ae-hit-dx, 0px) * 0.34 * var(--ae-hit-emphasis, 1)),
+        calc(var(--ae-hit-dy, 0px) * 0.34),
+        0
+      )
+      rotate(calc(var(--ae-hit-angle, 0deg) + var(--ae-hit-spin, 0deg) * 0.2))
+      scale(1.3);
+  }
+  58% {
+    opacity: 0.92;
+    transform: translate3d(
+        calc(var(--ae-hit-dx, 0px) * 0.82 * var(--ae-hit-emphasis, 1)),
+        calc(var(--ae-hit-dy, 0px) * 0.82 + var(--ae-hit-gravity, 0px) * 0.3),
+        0
+      )
+      rotate(calc(var(--ae-hit-angle, 0deg) + var(--ae-hit-spin, 0deg) * 0.65))
+      scale(0.86);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(
+        calc(var(--ae-hit-dx, 0px) * var(--ae-hit-emphasis, 1)),
+        calc(var(--ae-hit-dy, 0px) + var(--ae-hit-gravity, 0px)),
+        0
+      )
+      rotate(calc(var(--ae-hit-angle, 0deg) + var(--ae-hit-spin, 0deg)))
+      scale(0.34);
+  }
+}
+
+/* The outer shockwave: snaps out and overshoots slightly past its resting
+   radius before it goes, so the ring reads as expanding air rather than as a
+   circle fading up. */
+@keyframes aeHitRingA {
+  0% {
+    opacity: 0;
+    transform: scale(0.12);
+  }
+  12% {
+    opacity: 0.95;
+    transform: scale(0.42);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+@keyframes aeHitRingB {
+  0% {
+    opacity: 0;
+    transform: scale(0.12);
+  }
+  12% {
+    opacity: 0.95;
+    transform: scale(0.42);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+
+/* The inner wave, running ahead of the outer one and dying sooner. */
+@keyframes aeHitRingInnerA {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+@keyframes aeHitRingInnerB {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+/* The impact flash. Almost all of its life is the first 40ms -- it is there to
+   be *felt* at the moment of contact and gone before the eye finds it, which is
+   what stops eight lanes of these becoming a strobe. */
+@keyframes aeHitBloomA {
+  0% {
+    opacity: 0;
+    transform: scale(0.25);
+  }
+  14% {
+    opacity: 0.95;
+    transform: scale(0.72);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+@keyframes aeHitBloomB {
+  0% {
+    opacity: 0;
+    transform: scale(0.25);
+  }
+  14% {
+    opacity: 0.95;
+    transform: scale(0.72);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+/* The golden starburst: spokes that snap open and rotate a little as they fade,
+   which is what makes a golden note read as an event rather than as a brighter
+   Excellent. */
+@keyframes aeHitSunA {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-24deg);
+  }
+  16% {
+    opacity: 0.9;
+    transform: scale(0.75) rotate(-6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35) rotate(26deg);
+  }
+}
+@keyframes aeHitSunB {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-24deg);
+  }
+  16% {
+    opacity: 0.9;
+    transform: scale(0.75) rotate(-6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35) rotate(26deg);
+  }
+}
+
+/* Reduced Motion. HIG Accessibility asks for motion to be *replaced*, not
+   slowed -- so the burst and the shockwave are gone outright, and the word
+   simply appears, holds, and goes. The player still learns what they hit, from
+   the word and from the tier's own sound. */
+.ae-hit-slot[data-static='true'] .ae-hit-ring,
+.ae-hit-slot[data-static='true'] .ae-hit-particle {
+  display: none !important;
+}
+
+/* The bloom and the golden starburst are pseudo-elements of the slot itself, so
+   they cannot be hidden by hiding a child. `content: none` removes them
+   outright -- no box, no animation, nothing latched on the compositor. */
+.ae-hit-slot[data-static='true']::before,
+.ae-hit-slot[data-static='true']::after {
+  content: none !important;
+}
+
+.ae-hit-slot[data-static='true'] .ae-hit-word-group {
+  animation: none;
+  opacity: 1;
+  transform: translate3d(0, -14px, 0);
+}
+
+/* ---------------------------------------------------------------------------
+   Clearing a note, and the extra gears above an ordinary hit
+   (src/game/lane/NoteBlock.tsx, src/game/lane/NoteLane.tsx,
+    src/game/effects/LaneHitFx.tsx).
+
+   Everything below obeys the same three rules as the burst layer above it:
+   `transform` and `opacity` only, one shared keyframe rather than a JS
+   animation per element, and not a single DOM node added to make it happen.
+   A cleared note is drawn entirely on the note's own `::before` and `::after`,
+   which the pill already has and which cost nothing until they are used.
+
+   The read the whole lane is built around: **ahead of the playhead, notes are
+   outlines; behind it, they are solid, lit and coloured by what you earned.**
+   Clearing is the transition between those two states, and it is triggered by
+   NoteLane writing two data attributes -- never by a re-render.
+--------------------------------------------------------------------------- */
+
+.ae-note {
+  /* Set by [data-cleared] below; transparent means "not sung yet". */
+  --ae-note-clear: transparent;
+  /* How far along the pill the fill sweeps, 0..1 -- judgeNote's partial credit,
+     written per note by NoteLane.paintCleared. 1 (a whole note) is the default
+     so a clear with no credit information looks exactly as it always did. */
+  --ae-note-fill: 1;
+}
+
+.ae-note::before,
+.ae-note::after {
+  content: '';
+  position: absolute;
+  /* -1px so the fill covers the pill's own 1px border rather than leaving a
+     pale hairline through the middle of a cleared note. */
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* The fill. Sweeps left-to-right -- the direction the note was sung in -- and
+   then stays for the rest of the song.
+
+   Two layers in one paint: a flat `background-color` carrying the singer's
+   colour, and a fixed specular `background-image` over the top of it. The
+   gradient is colour-independent (white at the crown, a shadow at the base),
+   which is what lets one static declaration give every singer's colour the same
+   glossy, slightly domed read the reference frame's sung pills have -- no
+   per-player gradient string, no second element, no extra paint pass. */
+.ae-note::before {
+  background-color: var(--ae-note-clear);
+  background-image: var(--ae-note-gloss, none);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* The flash. Blooms vertically past the pill and is gone in a third of a
+   second: a note is *thin*, so a uniform scale would read as a wide smear
+   while a vertical bloom reads as an impact. */
+.ae-note::after {
+  background: #fff;
+  transform: scaleY(1);
+}
+
+/* A landed note fills with the *singer's* colour (--ae-note-sung, published
+   once per lane by NoteLane), not with a judgement colour. That is the
+   reference frame's read and the reason it works across a room: the trail
+   behind the playhead says whose it is, at a glance, with no legend to learn.
+
+   The tier is not lost -- it is carried by the glow's reach and by the burst's
+   word ("Excellent"/"Good"), which is more than colour alone ever said. */
+.ae-note[data-cleared='epic'],
+.ae-note[data-cleared='good'] {
+  --ae-note-clear: var(--ae-note-sung, var(--ae-note-epic, #fff));
+  --ae-note-gloss: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.24) 42%,
+    rgba(255, 255, 255, 0) 58%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+}
+.ae-note[data-cleared='awful'] {
+  --ae-note-clear: var(--ae-note-awful, #fff);
+}
+/* Golden outranks the tier it was judged at -- NoteLane only ever sets this on
+   a note that was actually landed, so a missed golden note keeps its coral. */
+.ae-note[data-cleared-golden='true'] {
+  --ae-note-clear: var(--ae-note-golden, #fff);
+}
+
+/* The resting state of a cleared note, and the state the animations below
+   settle back into. Declared as the base rather than held with
+   `animation-fill-mode: forwards`, so a finished clear leaves nothing latched
+   on the compositor -- there can be forty of these on screen per lane. */
+.ae-note[data-cleared]::before {
+  opacity: 1;
+  transform: scaleX(var(--ae-note-fill, 1));
+  box-shadow: 0 0 16px var(--ae-note-clear);
+}
+
+/* A note that earned *part* of its points gets a bright edge exactly where the
+   fill stopped, so "two thirds" reads as a deliberate boundary rather than as
+   a rendering accident. It costs nothing: the highlight is one more gradient
+   stop on a background the fill already paints, and because the gradient rides
+   the same `scaleX` as the fill, its right edge is the fill's right edge at
+   every credit value without a single number being computed. */
+.ae-note[data-partial='true']::before {
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, 0.9) 100%),
+    var(--ae-note-gloss, none);
+}
+
+/* How far the fill glows is the tier, now that the colour is the singer's.
+   An Excellent throws light well past the pill; a Good is lit but contained. */
+.ae-note[data-cleared='epic']::before {
+  box-shadow:
+    0 0 22px var(--ae-note-clear),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.ae-note[data-cleared='good']::before {
+  box-shadow:
+    0 0 10px var(--ae-note-clear),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.ae-note[data-cleared] {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* A cleared golden note carries a white inner rim that no other outcome has.
+   That is deliberate redundancy: gold-on-gold is the one pair this palette
+   cannot separate by colour (an Excellent is already gold), and a golden note
+   has to stay identifiable with the animation switched off entirely. */
+.ae-note[data-cleared-golden='true']::before {
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.95),
+    0 0 0 1.5px rgba(255, 255, 255, 0.75),
+    0 0 26px var(--ae-note-golden, #fff);
+}
+
+/* A missed note is *un-filled*, dimmed and left behind -- the visual opposite
+   of a clear, so the trail behind the playhead reads as a score at a glance.
+   No swell, no flash: celebrating a miss because it happened would be a lie. */
+.ae-note[data-cleared='awful'] {
+  opacity: 0.5;
+  border-color: var(--ae-note-awful, rgba(255, 255, 255, 0.3));
+  animation: none;
+}
+.ae-note[data-cleared='awful']::before {
+  opacity: 0.3;
+  box-shadow: none;
+}
+.ae-note[data-cleared='awful']::after {
+  animation: none;
+}
+
+/* The clear itself. `backwards` rather than `both`: the from-state applies
+   before the first frame (no one-frame flash of the finished fill), and the
+   animation releases its hold the moment it ends, leaving the resting rules
+   above in charge. */
+.ae-note[data-cleared]:not([data-cleared='awful']) {
+  animation: aeNoteClear 340ms cubic-bezier(0.34, 1.42, 0.5, 1) backwards;
+}
+.ae-note[data-cleared]:not([data-cleared='awful'])::before {
+  animation: aeNoteFill 200ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.ae-note[data-cleared]:not([data-cleared='awful'])::after {
+  animation: aeNoteFlash 300ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Golden gets the same gesture with more of it, and a second beat: the pill
+   swells, settles, and swells again, which is what makes it read as an event
+   rather than as a slightly larger hit.
+
+   The `[data-cleared]` in these selectors is doing real work and is not
+   redundant: without it these rules are one attribute selector *less* specific
+   than the generic clear above, and a golden note silently animates with the
+   ordinary keyframes. Verified in a browser -- it is exactly what happened. */
+.ae-note[data-cleared][data-cleared-golden='true']:not([data-cleared='awful']) {
+  animation: aeNoteClearGolden 560ms cubic-bezier(0.34, 1.42, 0.5, 1) backwards;
+}
+.ae-note[data-cleared][data-cleared-golden='true']:not([data-cleared='awful'])::after {
+  animation: aeNoteFlashGolden 460ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Sweeps to wherever the credit ran out, not always to the end. Same keyframe,
+   same 200ms, same easing -- the partial note is the staged clear the whole
+   lane already does, stopped where the singing stopped. */
+@keyframes aeNoteFill {
+  from {
+    opacity: 1;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(var(--ae-note-fill, 1));
+  }
+}
+
+@keyframes aeNoteClear {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  26% {
+    transform: scale3d(1.015, 1.9, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes aeNoteClearGolden {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  20% {
+    transform: scale3d(1.03, 2.5, 1);
+  }
+  52% {
+    transform: scale3d(1, 0.92, 1);
+  }
+  72% {
+    transform: scale3d(1.01, 1.45, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes aeNoteFlash {
+  0% {
+    opacity: 0.85;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(3);
+  }
+}
+
+@keyframes aeNoteFlashGolden {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(4.6);
+  }
+}
+
+/* Reduce Motion. The note still fills in, still keeps the colour it earned and
+   still shows its golden rim -- it simply arrives instead of sweeping. HIG
+   Accessibility asks for motion to be *replaced*, not slowed, and the
+   information here (what you cleared, and whether it was golden) is not
+   optional. */
+/* `!important` deliberately, and for the same reason `.ae-hit-slot[data-static]`
+   above carries it: the golden rules are the most specific selectors in this
+   file, so without it a golden note would keep swelling and flashing for
+   someone who asked for less motion -- which is precisely the case that must
+   never be the exception. Verified in a browser; it is what happened. */
+.ae-lane[data-static='true'] .ae-note,
+.ae-lane[data-static='true'] .ae-note::before,
+.ae-lane[data-static='true'] .ae-note::after {
+  animation: none !important;
+}
+.ae-lane[data-static='true'] .ae-note::after {
+  opacity: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ae-note,
+  .ae-note::before,
+  .ae-note::after {
+    animation: none !important;
+  }
+  .ae-note::after {
+    opacity: 0 !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The live pitch indicator (src/game/lane/PitchLine.tsx).
+
+   The rule's Y is a `transform` written every frame by framer-motion; nothing
+   here may add a second per-frame write. Everything below is either static, or
+   keyed off `data-on-pitch`, which the frame loop flips only when the singer
+   actually crosses the tolerance band -- a handful of times per note.
+
+   `box-shadow` lives here rather than inline because it is the one property
+   that differs between the two states, and a state that changes a few times a
+   note is a repaint of one 2px-tall element, not a per-frame cost.
+--------------------------------------------------------------------------- */
+
+.ae-pitch-line {
+  box-shadow:
+    0 0 12px var(--ae-pitch-color, #fff),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+/* On the note: the rule hardens. Brighter halo, a white core through the
+   middle, and the tip pulses. This is the singer's fastest possible read that
+   the thing they are doing right now is scoring -- faster than the note pill
+   filling in, which does not happen until the note is over. */
+.ae-pitch-line[data-on-pitch='true'] {
+  box-shadow:
+    0 0 6px #fff,
+    0 0 18px var(--ae-pitch-color, #fff),
+    0 0 34px var(--ae-pitch-color, #fff),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+/* The lead: the rule continued over the pill under the playhead, fading out.
+   A gradient rather than a solid, so it reads as "where I am aiming" and never
+   as chart the singer has somehow already sung. */
+.ae-pitch-lead {
+  background: linear-gradient(90deg, var(--ae-pitch-color, #fff) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 0.4;
+  border-radius: inherit;
+}
+
+.ae-pitch-line[data-on-pitch='true'] .ae-pitch-lead {
+  opacity: 0.85;
+}
+
+.ae-pitch-arrow {
+  filter: drop-shadow(0 0 6px var(--ae-pitch-color, #fff));
+}
+
+.ae-pitch-line[data-on-pitch='true'] .ae-pitch-arrow {
+  animation: aePitchTip 640ms ease-in-out infinite;
+}
+
+@keyframes aePitchTip {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.35);
+  }
+}
+
+/* Reduce Motion. The rule is a continuous data readout, not decoration, so it
+   still moves and still hardens on the note -- only the tip's pulse, which is
+   the one purely decorative part, is dropped. */
+@media (prefers-reduced-motion: reduce) {
+  .ae-pitch-line[data-on-pitch='true'] .ae-pitch-arrow {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Burst emphasis: how hard a hit hits.
+
+   One multiplier, `--ae-hit-emphasis`, folded into the word and particle
+   keyframes above. It is the product of two independent things -- the run the
+   hit landed on (comboHeatLevel) and whether the note was golden -- so a
+   golden note at the top of a fifteen-note run is visibly the biggest thing
+   that happens in a song, without either factor needing its own keyframes.
+
+   Horizontal spread only. The vertical reach stays exactly where
+   createBurstParticles put it, because lanes are stacked a few pixels apart
+   and an eight-player lane is 64px tall: emphasis must never be the thing that
+   throws one singer's sparks into another singer's lane.
+--------------------------------------------------------------------------- */
+
+.ae-hit-slot {
+  --ae-hit-heat-mul: 1;
+  --ae-hit-golden-mul: 1;
+  --ae-hit-emphasis: calc(var(--ae-hit-heat-mul) * var(--ae-hit-golden-mul));
+  /* The word gets a damped share of the same emphasis. Sparks have no
+     legibility constraint; the word does -- HIG Typography is explicit that
+     transient hit values must not compete with the text people are actually
+     reading, and the lyric line is 32-68px. At full emphasis the word would
+     peak at ~51px against a 68px lyric; damped, it peaks at ~44px, which still
+     reads as a visibly bigger pop while leaving the hierarchy intact. */
+  --ae-hit-word-emphasis: calc(1 + (var(--ae-hit-emphasis) - 1) * 0.6);
+}
+.ae-hit-slot[data-heat='1'] {
+  --ae-hit-heat-mul: 1.1;
+}
+.ae-hit-slot[data-heat='2'] {
+  --ae-hit-heat-mul: 1.22;
+}
+.ae-hit-slot[data-golden='true'] {
+  --ae-hit-golden-mul: 1.3;
+}
+
+/* A golden burst gets a second shockwave, for free: the ring already animates,
+   and a pseudo-element rides its parent's transform and opacity. */
+.ae-hit-ring::after {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 1px solid var(--ae-hit-color, #fff);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+}
+.ae-hit-slot[data-golden='true'] .ae-hit-ring::after {
+  opacity: 1;
+}
+
+/* "Golden!" is a longer word than any tier name and it is the one the player
+   most wants to catch out of the corner of their eye, so it gets tracking and
+   a hotter halo rather than a bigger point size (which would start competing
+   with the lyrics -- see popupFontPx). */
+.ae-hit-slot[data-golden='true'] .ae-hit-word {
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 0 6px rgba(0, 0, 0, 0.85),
+    0 0 14px var(--ae-hit-color, #fff),
+    0 0 34px var(--ae-hit-color, #fff);
+}
+
+/* ---------------------------------------------------------------------------
+   Combo heat: the lane itself glowing while a singer is on a run.
+
+   One node per lane, animating one property. It exists because a combo is
+   currently a number in a score card, which is precisely the channel a singer
+   mid-phrase has no attention to spare for; this puts the same information
+   where peripheral vision can pick it up. It is the only continuous animation
+   on this screen, and it stops the moment the run breaks (LaneHitFx writes
+   `data-heat="0"` on the next judged note, and `awful` is always level 0).
+--------------------------------------------------------------------------- */
+
+.ae-hit-heat {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(65% 130% at 35% 50%, var(--ae-hit-heat-color, #fff) 0%, transparent 72%);
+}
+
+.ae-hit-layer[data-heat='1'] .ae-hit-heat {
+  --ae-hit-heat-peak: 0.13;
+  animation: aeHitHeat 1900ms ease-in-out infinite;
+}
+.ae-hit-layer[data-heat='2'] .ae-hit-heat {
+  --ae-hit-heat-peak: 0.24;
+  animation: aeHitHeat 1150ms ease-in-out infinite;
+}
+
+@keyframes aeHitHeat {
+  0%,
+  100% {
+    opacity: calc(var(--ae-hit-heat-peak, 0.13) * 0.4);
+  }
+  50% {
+    opacity: var(--ae-hit-heat-peak, 0.13);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ae-hit-heat {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The sustained golden starburst (src/game/effects/LaneSustainFx.tsx).
+
+   Fires where the playhead crosses a note the singer is currently landing --
+   a *state*, not an event, so unlike the hit burst above it can turn on and
+   off many times inside one note.
+
+   The whole file is written under `[data-on='true']`. That is not tidiness: it
+   means that while the spark is off -- most of a song, on most lanes -- there
+   is no running animation and no promoted compositor layer for any of these
+   nodes. Eight lanes' worth of continuously animating sparks would otherwise be
+   the largest source of compositor work on the screen, and they would be
+   running for the entire song whether or not anyone was singing.
+--------------------------------------------------------------------------- */
+
+.ae-sustain {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  /* The one property that changes when the spark comes and goes. Short, so it
+     tracks a singer dropping off pitch rather than lagging behind them. */
+  transition: opacity 90ms linear;
+}
+
+.ae-sustain[data-on='true'] {
+  opacity: 1;
+  will-change: transform, opacity;
+}
+
+.ae-sustain-core,
+.ae-sustain-spark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* The bright centre: white core, gold body, and a faint halo in the lane's own
+   colour so a glance still says *whose* note is lit. */
+.ae-sustain-core {
+  width: 22px;
+  height: 22px;
+  margin: -11px;
+  background: radial-gradient(circle, #fff 22%, var(--ae-note-golden, #ffd66b) 55%, rgba(255, 214, 107, 0) 78%);
+  box-shadow:
+    0 0 18px 4px rgba(255, 214, 107, 0.9),
+    0 0 34px 10px var(--ae-sustain-halo, rgba(255, 214, 107, 0.5));
+}
+
+.ae-sustain-spark {
+  background: radial-gradient(circle, #fff 30%, var(--ae-note-golden, #ffd66b) 80%);
+  box-shadow: 0 0 8px rgba(255, 214, 107, 0.95);
+}
+
+.ae-sustain[data-on='true'] .ae-sustain-core {
+  animation: aeSustainCore 520ms cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+.ae-sustain[data-on='true'] .ae-sustain-spark {
+  animation: aeSustainSpark 620ms linear infinite;
+}
+
+@keyframes aeSustainCore {
+  from {
+    opacity: 0.85;
+    transform: translate3d(0, 0, 0) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.18);
+  }
+}
+
+/* The trail. Always backwards along the note (dx is negative by construction,
+   see sustainSpark.ts): the spark is an ember coming off the point the note is
+   being filled from, not an explosion centred on it. */
+@keyframes aeSustainSpark {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.4);
+  }
+  18% {
+    opacity: 1;
+    transform: translate3d(calc(var(--ae-sustain-dx, -20px) * 0.2), calc(var(--ae-sustain-dy, 0px) * 0.2), 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--ae-sustain-dx, -20px), var(--ae-sustain-dy, 0px), 0) scale(0.2);
+  }
+}
+
+/* Reduced Motion. HIG Accessibility asks for motion to be *replaced*, not
+   slowed: the trail is gone outright and the pulse does not run, but the
+   singer still gets the information the effect exists to carry -- a steady
+   golden mark sitting exactly where they are landing the note. */
+.ae-sustain[data-static='true'] .ae-sustain-spark {
+  display: none !important;
+}
+
+.ae-sustain[data-static='true'] .ae-sustain-core {
+  animation: none;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}

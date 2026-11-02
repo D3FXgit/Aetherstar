@@ -1,0 +1,17 @@
+{
+  "name": "aetherstar-native",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "main": "index.node",
+  "types": "index.d.ts",
+  "napi": {
+    "binaryName": "aetherstar-native",
+    "targets": [
+      "x86_64-pc-windows-msvc",
+      "x86_64-apple-darwin",
+      "aarch64-apple-darwin",
+      "x86_64-unknown-linux-gnu"
+    ]
+  }
+}

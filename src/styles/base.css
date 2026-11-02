@@ -1,0 +1,47 @@
+/* Document defaults and the app's single focus treatment. */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #f2f2f4;
+  /* Nothing in a desktop shell should rubber-band or select like a web page. */
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Couch focus ring: findable from a sofa, three metres away.
+
+   `outline` rather than a Tailwind `ring`, because a ring is a box-shadow and
+   inline shadows on surfaces would swallow it. The second selector covers the
+   gamepad: its programmatic focus() may not match :focus-visible, so
+   src/input/navMode.ts stamps data-nav-mode="directional" on <html> instead.
+   These rules sit outside Tailwind's layers so no component can diverge. */
+:focus-visible,
+:root[data-nav-mode='directional'] :focus {
+  outline: 3px solid oklch(0.78 0.19 195);
+  outline-offset: 3px;
+}
+
+/* For a full-bleed row inside a clipping container: same ring, drawn inside. */
+[data-focus-inset]:focus-visible,
+:root[data-nav-mode='directional'] [data-focus-inset]:focus {
+  outline-offset: -3px;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: #00000040;
+  border-radius: 4px;
+  padding: 1px 5px;
+}

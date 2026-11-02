@@ -1,0 +1,8 @@
+#ARTIST:No Gap
+#TITLE:Song
+#MP3:song.mp3
+#BPM:180
+: 0 4 60 la
+- 8
+: 12 4 62 la
+E

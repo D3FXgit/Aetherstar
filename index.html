@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Content-Security-Policy for the packaged app. Production loads this file
+      over file://, where the response-header CSP set in electron/main.cjs
+      (applyContentSecurityPolicy) never applies -- keep the two in sync.
+      In dev both apply (the stricter wins), which is safe because Vite inserts
+      its inline react-refresh preamble at the very top of <head>, before this
+      tag, and a <meta> CSP only governs what comes after it; ws://localhost:5173
+      is listed for the HMR socket.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: aetherstar-media: app-media:; media-src 'self' aetherstar-media: app-media:; connect-src 'self' aetherstar-media: app-media: ws://localhost:5173; object-src 'none'; base-uri 'self'"
+    />
+    <title>AetherStar</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

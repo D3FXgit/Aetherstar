@@ -1,0 +1,6 @@
+#ARTIST:Empty
+#TITLE:No Notes
+#MP3:song.mp3
+#BPM:120
+#GAP:0
+E

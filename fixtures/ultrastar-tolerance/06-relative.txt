@@ -1,0 +1,14 @@
+#ARTIST:Relative
+#TITLE:Mode
+#MP3:song.mp3
+#BPM:100
+#GAP:0
+#RELATIVE:yes
+: 0 2 60 one
+: 4 2 60 two
+- 8 8
+: 0 2 62 three
+: 4 2 62 four
+- 8 8
+: 0 2 64 five
+E

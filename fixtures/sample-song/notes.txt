@@ -1,0 +1,85 @@
+#VERSION:1.1.0
+#TITLE:First Light
+#ARTIST:AetherStar
+#EDITION:AetherStar Demo
+#LANGUAGE:English
+#GENRE:Pop
+#YEAR:2026
+#CREATOR:AetherStar
+#AUDIO:instrumental.wav
+#MP3:instrumental.wav
+#VOCALS:vocals.wav
+#INSTRUMENTAL:instrumental.wav
+#COVER:cover.png
+#BPM:120
+#GAP:6000
+#PREVIEWSTART:34
+: 0 3 64 Wake
+: 4 2 64 up,
+: 6 2 62 the
+: 8 3 64 night
+: 12 2 65 is
+: 14 4 67 fading
+: 20 8 64 slow
+- 30
+: 32 2 64 A
+: 34 3 65 spark
+: 38 2 64 of
+: 40 4 69 gold
+: 46 4 67 begins
+: 50 2 65 to
+: 52 8 64 glow
+- 62
+: 64 4 67 Hold
+: 68 2 67 the
+: 70 4 69 note
+: 76 2 67 and
+: 78 2 65 let
+: 80 2 64 it
+* 82 10 67 ring
+- 94
+: 96 4 65 Every
+: 100 3 64 voice
+: 104 2 62 has
+: 106 4 64 room
+: 110 2 62 to
+: 112 10 60 sing
+- 124
+R 160 2 57 Step
+R 162 1 57 to
+R 163 1 57 the
+R 164 3 57 mic,
+R 168 2 57 count
+R 170 1 57 it
+R 171 3 57 in,
+R 176 2 57 keep
+R 178 2 57 the
+R 180 2 57 rhythm
+G 184 6 57 tight
+- 192
+F 192 12 64 Ooh
+: 208 2 67 sing
+: 210 6 67 along
+- 222
+: 224 3 69 First
+: 228 4 72 light
+: 234 2 69 is
+: 236 4 67 shining
+: 240 2 67 on
+: 242 2 65 the
+: 244 8 67 stage
+- 254
+: 256 3 69 Sing
+: 260 2 67 it
+: 262 4 69 out
+: 268 2 64 and
+: 270 2 65 turn
+: 272 2 67 the
+* 274 10 65 page
+- 286
+: 288 3 67 Here
+: 292 3 69 comes
+: 296 2 67 the
+: 298 4 65 first
+: 304 12 64 light
+E

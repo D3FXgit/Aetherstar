@@ -1,0 +1,59 @@
+name: Bug report
+description: Something in AetherStar does not work as expected.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please check the [troubleshooting guide](https://github.com/D3FXgit/AetherStar/blob/main/docs/troubleshooting.md) first.
+        Do not attach copyrighted songs, lyrics or music. If a specific chart triggers the bug, describe it or share a minimal invented chart that reproduces it.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Settings > Song Folders
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AetherStar version
+      placeholder: "1.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS (Apple silicon)
+        - macOS (Intel)
+        - Linux
+    validations:
+      required: true
+  - type: input
+    id: os-version
+    attributes:
+      label: OS version
+      placeholder: "Windows 11 24H2, macOS 15.1, Ubuntu 24.04 ..."
+  - type: textarea
+    id: audio
+    attributes:
+      label: Audio setup
+      description: Microphones, audio interface, speakers or headphones (Bluetooth?), number of singers.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or error messages
+      description: Error text shown in the app, or console output if you run it from a terminal.
+      render: text

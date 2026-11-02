@@ -1,0 +1,11 @@
+#artist : lower Case Artist
+  #Title:Indented Tag
+#Mp3   :   song.mp3
+
+#bpm: 240,5
+#GAP :  -250,75
+#VideoGap:1,5
+#language:German
+#EDITION:Party
+: 0 4 60 la
+E

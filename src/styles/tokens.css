@@ -1,0 +1,48 @@
+/* Design tokens as CSS. Mirrors src/design/tokens.ts; tokens.test.ts keeps the
+   two in step. */
+
+:root {
+  color-scheme: dark;
+  font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+
+  /* Text emphasis scale (tokens.textOpacity). */
+  --ae-text-primary: rgba(242, 242, 244, 0.92);
+  --ae-text-secondary: rgba(242, 242, 244, 0.68);
+  --ae-text-tertiary: rgba(242, 242, 244, 0.5);
+
+  /* Solid menu surfaces (tokens.surface). */
+  --ae-surface-panel: #15131d;
+  --ae-surface-raised: #1f1c2a;
+  --ae-surface-hover: #2a2638;
+  --ae-line: rgba(255, 255, 255, 0.09);
+
+  /* Per-mic colours (MIC_RIM_COLORS), P1..P8. */
+  --ae-mic-1: oklch(0.78 0.19 195);
+  --ae-mic-2: oklch(0.78 0.19 25);
+  --ae-mic-3: oklch(0.80 0.17 130);
+  --ae-mic-4: oklch(0.78 0.19 320);
+  --ae-mic-5: oklch(0.85 0.16 85);
+  --ae-mic-6: oklch(0.72 0.19 265);
+  --ae-mic-7: oklch(0.80 0.16 55);
+  --ae-mic-8: oklch(0.78 0.17 350);
+}
+
+/* Tailwind utilities for the tokens above: `text-ink-secondary`,
+   `bg-surface-panel`, `border-line`, `bg-accent-magenta`, ... */
+@theme {
+  --color-ink-primary: var(--ae-text-primary);
+  --color-ink-secondary: var(--ae-text-secondary);
+  --color-ink-tertiary: var(--ae-text-tertiary);
+
+  --color-surface-panel: var(--ae-surface-panel);
+  --color-surface-raised: var(--ae-surface-raised);
+  --color-surface-hover: var(--ae-surface-hover);
+  --color-line: var(--ae-line);
+
+  --color-accent-coral: oklch(0.72 0.2 25);
+  --color-accent-cyan: oklch(0.78 0.19 195);
+  --color-accent-gold: oklch(0.85 0.16 85);
+  --color-accent-magenta: oklch(0.78 0.19 320);
+}

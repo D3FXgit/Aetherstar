@@ -1,0 +1,19 @@
+#ARTIST:Märzwind
+#TITLE:Grüße vom Fluss
+#MP3:Märzwind - Grüße vom Fluss.mp3
+#LANGUAGE:German
+#BPM:212,5
+#GAP:1250,5
+: 0 4 7 Über
+: 4 2 7 den
+: 6 6 9 Dächern
+- 14
+: 16 3 11 glüht’s
+: 20 2 9 im
+: 22 8 7 Licht
+- 32
+: 34 4 4 Grüße
+: 38 4 5 aus
+: 42 2 7 dem
+: 44 8 4 Süden
+E

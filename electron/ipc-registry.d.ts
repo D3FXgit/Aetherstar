@@ -1,0 +1,83 @@
+export type IpcDirection = 'invoke' | 'send'
+
+export interface IpcChannelDef {
+  channel: string
+  direction: IpcDirection
+}
+
+export const IPC_CHANNELS: {
+  APP_GET_INFO: IpcChannelDef
+  DIALOG_OPEN_FILE: IpcChannelDef
+  WINDOW_MINIMIZE: IpcChannelDef
+  APP_QUIT: IpcChannelDef
+  WINDOW_TOGGLE_MAXIMIZE: IpcChannelDef
+  WINDOW_GET_DISPLAY_MODE: IpcChannelDef
+  WINDOW_SET_WINDOWED: IpcChannelDef
+  WINDOW_DISPLAY_MODE_CHANGED: IpcChannelDef
+  APP_PING: IpcChannelDef
+  MAIN_PONG: IpcChannelDef
+
+  LIBRARY_ADD_ROOT: IpcChannelDef
+  LIBRARY_REMOVE_ROOT: IpcChannelDef
+  LIBRARY_LIST_ROOTS: IpcChannelDef
+  LIBRARY_RESCAN: IpcChannelDef
+  LIBRARY_SEARCH: IpcChannelDef
+  LIBRARY_GET_SONG: IpcChannelDef
+  LIBRARY_LIST_SCAN_ERRORS: IpcChannelDef
+  LIBRARY_SCAN_PROGRESS: IpcChannelDef
+  LIBRARY_SET_GAMEPLAY_ACTIVE: IpcChannelDef
+  LIBRARY_SET_LOUDNESS: IpcChannelDef
+  LIBRARY_LIST_FAVORITES: IpcChannelDef
+  LIBRARY_SET_FAVORITE: IpcChannelDef
+  LIBRARY_RECORD_PLAY: IpcChannelDef
+
+  STAGE_GET_FIXTURE_CHART_PATH: IpcChannelDef
+
+  PLAYERS_LIST: IpcChannelDef
+  PLAYERS_CREATE: IpcChannelDef
+  PLAYERS_UPDATE: IpcChannelDef
+  PLAYERS_DELETE: IpcChannelDef
+  PLAYERS_REORDER: IpcChannelDef
+  PLAYERS_READ_IMPORTED_PHOTO: IpcChannelDef
+
+  AUDIO_LIST_DEVICES: IpcChannelDef
+  AUDIO_REQUEST_PERMISSION: IpcChannelDef
+  AUDIO_GET_PERMISSION_STATUS: IpcChannelDef
+  AUDIO_START_CAPTURE: IpcChannelDef
+  AUDIO_STOP_CAPTURE: IpcChannelDef
+  AUDIO_PITCH_BATCH: IpcChannelDef
+  AUDIO_DEVICE_LIST_CHANGED: IpcChannelDef
+  AUDIO_START_RAW_SCOPE: IpcChannelDef
+  AUDIO_STOP_RAW_SCOPE: IpcChannelDef
+  AUDIO_RAW_SCOPE_CHUNK: IpcChannelDef
+  AUDIO_GET_MIC_MONITOR: IpcChannelDef
+  AUDIO_SET_MIC_MONITOR: IpcChannelDef
+
+  AUDIENCE_REPORT_SCORE_STATE: IpcChannelDef
+  AUDIENCE_SCORE_STATE: IpcChannelDef
+  AUDIENCE_LIST_DISPLAYS: IpcChannelDef
+  AUDIENCE_SET_DISPLAY: IpcChannelDef
+  AUDIENCE_SET_ENABLED: IpcChannelDef
+  AUDIENCE_GET_WINDOW_PRESENCE: IpcChannelDef
+  AUDIENCE_WINDOW_PRESENCE: IpcChannelDef
+
+  FX_GET_ASSETS_DIR: IpcChannelDef
+
+  SESSION_START: IpcChannelDef
+  SESSION_RECORD_ENTRY: IpcChannelDef
+  SESSION_LIST_LEADERBOARD: IpcChannelDef
+
+  MULTIPLAYER_LIST_MIC_SLOTS: IpcChannelDef
+  MULTIPLAYER_SAVE_MIC_SLOT: IpcChannelDef
+  MULTIPLAYER_CLEAR_MIC_SLOT: IpcChannelDef
+  MULTIPLAYER_GET_CPU_USAGE: IpcChannelDef
+
+  CALIBRATION_GET: IpcChannelDef
+  CALIBRATION_SET: IpcChannelDef
+
+  I18N_LIST_LANGUAGES: IpcChannelDef
+  I18N_LOAD_LANGUAGE: IpcChannelDef
+  I18N_OPEN_LANGUAGES_FOLDER: IpcChannelDef
+  I18N_LANGUAGES_CHANGED: IpcChannelDef
+  I18N_SET_ACTIVE_LANGUAGE: IpcChannelDef
+}

@@ -1,0 +1,19 @@
+#ARTIST:Relative Duet
+#TITLE:Per Voice Offsets
+#MP3:song.mp3
+#BPM:100
+#GAP:5000
+#RELATIVE:yes
+#P1:Alice
+#P2:Bob
+P1
+: 0 2 60 a1
+- 4 4
+: 0 2 60 a2
+P2
+: 0 2 62 b1
+- 4 4
+: 0 2 62 b2
+P1
+: 0 2 64 a3
+E

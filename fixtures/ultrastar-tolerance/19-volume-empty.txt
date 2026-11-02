@@ -1,0 +1,8 @@
+#ARTIST:No Volume
+#TITLE:Unmeasured
+#MP3:song.mp3
+#BPM:200
+#GAP:1000
+#VOLUME:
+: 0 4 60 hi
+E

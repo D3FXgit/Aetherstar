@@ -1,0 +1,9 @@
+#ENCODING:CP1252
+#ARTIST:Grünemann
+#TITLE:Café
+#MP3:song.mp3
+#BPM:120
+#GAP:0
+: 0 4 60 Gründ
+: 4 4 60 don’t
+E

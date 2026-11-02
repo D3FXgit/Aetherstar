@@ -1,0 +1,16 @@
+#ARTIST:Malformed
+#TITLE:But Mostly Fine
+#MP3:song.mp3
+#BPM:200
+#GAP:0
+: 0 4 60 good
+: 4 4
+: x y z bad
+random garbage line
+: 8 4 62 also good
+: 12 4 64
+- 16
+* 20 4 66 golden
+F 24 4 0 freestyle
+: 28 4,5 68 comma length
+E

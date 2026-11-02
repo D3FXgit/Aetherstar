@@ -1,0 +1,10 @@
+#ARTIST:Volume Tag
+#TITLE:Author Trim
+#MP3:song.mp3
+#BPM:200
+#GAP:1000
+#VOLUME:0,7
+: 0 4 60 hi
+- 8
+: 8 4 62 there
+E

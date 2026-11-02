@@ -1,0 +1,11 @@
+#VERSION:1.1.0
+#ARTIST:Stems
+#TITLE:Vocals And Instrumental
+#AUDIO:full-mix.mp3
+#MP3:legacy-full-mix.mp3
+#VOCALS:vocals.mp3
+#INSTRUMENTAL:instrumental.mp3
+#BPM:120
+#GAP:0
+: 0 4 60 la
+E
